@@ -26,20 +26,16 @@
 	<div class="grid flex-1 gap-8 overflow-hidden lg:grid-cols-3">
 		<div class="flex h-full flex-col gap-4 overflow-y-auto p-4">
 			<div class="my-4 flex h-full flex-col gap-4 p-4 max-w-lg">
-				<div class="">
-					<div class="card">
-						<h1 class="h1">What you need to do</h1>
-						<p>
-							Put 
-						</p>
-					</div>
-					<div class="card">
-						<h1 class="h1">What you need to do</h1>
-						<p>
-							Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum mollitia alias, illum
-							tempora sed maiores repellendus deserunt corrupti aperiam tempore necessitatibus.
-						</p>
-					</div>
+				<div class="card">
+					<h1 class="h1">What you need to do</h1>
+					<p>Put</p>
+				</div>
+				<div class="card">
+					<h1 class="h1">What you need to do</h1>
+					<p>
+						Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum mollitia alias, illum
+						tempora sed maiores repellendus deserunt corrupti aperiam tempore necessitatibus.
+					</p>
 				</div>
 			</div>
 		</div>
@@ -59,8 +55,9 @@
 								}
 							}}
 							theme={oneDark}
-							placeholder={'Start coding here..  \n sdsdsd'}
+							placeholder={'Start coding here..'}
 						/>
+						<button class="btn"> Send </button>
 					</Control>
 				</Field>
 			</form>
