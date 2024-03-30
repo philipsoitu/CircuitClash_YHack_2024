@@ -1,28 +1,21 @@
 <script lang="ts">
-	import '../styles.css'
-	import { invalidate } from '$app/navigation'
-	import { onMount } from 'svelte'
-
-	export let data
-
-	let { supabase, session } = data
-	$: ({ supabase, session } = data)
+	import { invalidateAll } from '$app/navigation';
+	import { supabaseClient } from '$lib/supabase';
+	import { onMount } from 'svelte';
+	import '../app.postcss';
 
 	onMount(() => {
-		const { data } = supabase.auth.onAuthStateChange((event, _session) => {
-			if (_session?.expires_at !== session?.expires_at) {
-				invalidate('supabase:auth')
-			}
-		})
+		const {
+			data: { subscription }
+		} = supabaseClient.auth.onAuthStateChange(() => {
+			console.log('Auth state change detected');
+			invalidateAll();
+		});
 
-		return () => data.subscription.unsubscribe()
-	})
+		return () => {
+			subscription.unsubscribe();
+		};
+	});
 </script>
 
-<svelte:head>
-	<title>User Management</title>
-</svelte:head>
-
-<div class="container" style="padding: 50px 0 100px 0">
-	<slot />
-</div>
+<slot />
