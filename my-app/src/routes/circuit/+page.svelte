@@ -127,7 +127,7 @@
 					<p class="questiondesc">{data.messages[0].description}</p>
 					<TruthTable truthTable={tb} {inputData} {outputData} />
 				</div>
-
+			</div>
 			{:else}
 				<div class="flex h-full flex-col gap-4 overflow-y-auto p-4">
 					<div class="card">
