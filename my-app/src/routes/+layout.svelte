@@ -19,7 +19,7 @@
     <div class="flex items-center gap-4">
         <a class="btn btn-sm" href="/circuit"> Levels </a>
 
-        <a class="btn btn-sm" href="/"> Docs </a>
+        <a class="btn btn-sm" href="/docs"> Docs </a>
 
         {#if !data.user}
             <div class="btn btn-sm">Sign In</div>
