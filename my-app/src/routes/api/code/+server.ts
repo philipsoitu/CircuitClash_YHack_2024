@@ -14,7 +14,7 @@ export const POST = async ({ locals, request }) => {
 	console.log(typeof parse2);
 	const { response } = await fetch('https://brebeufapi.vercel.app/api/besthexes', {
 		method: 'POST',
-		headers: { 'Content-type': 'text/html'},
+		headers: { 'Content-type': 'text/html' },
 		body: parse
 	}).then((res) => res.json());
 

@@ -5,7 +5,7 @@
 	export let shdl: string;
 
 	let possibleViewers: string[] = ['main'];
-	let currentViewer: number = 0;
+	
 	function generatePossibleViewers(inputString: string) {
 		// Regular expression to match STARTGATE and ENDGATE blocks along with their contents
 		const gateRegex = /STARTGATE.*?ENDGATE/gms;
@@ -59,36 +59,6 @@
 		return result;
 	}
 
-	function parseCustom(inputString: string) {
-		// Regular expression to match STARTGATE and ENDGATE blocks along with their contents
-		const gateRegex = /STARTGATE.*?ENDGATE/gms;
-
-		// Extracting all occurrences of STARTGATE and ENDGATE blocks
-		const gates = inputString.match(gateRegex) || [];
-
-		// Removing the STARTGATE and ENDGATE blocks from the input string
-		const trimmedString = inputString.replace(gateRegex, '');
-
-		// Extracting individual lines from the trimmed string
-		const lines = trimmedString
-			.split('\n')
-			.map((line) => line.trim())
-			.filter((line) => line !== '');
-
-		// const result = [...lines].join('\n');
-		const wordFollowingStartgateRegex = /STARTGATE\s+(\w+)/g;
-
-		// Array to collect all matches
-		const wordsFollowingStartgate = [];
-
-		// Finding and storing all matches
-		let match;
-		while ((match = wordFollowingStartgateRegex.exec(inputString)) !== null) {
-			wordsFollowingStartgate.push(match[1]);
-		}
-
-		return wordsFollowingStartgate;
-	}
 
 	possibleViewers = generatePossibleViewers(shdl);
 </script>

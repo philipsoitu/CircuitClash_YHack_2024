@@ -36,31 +36,31 @@
 	let response = '';
 	let value = '';
 	async function sendCode(code: string) {
-		try {
-			console.log(typeof code);
-			let response = await fetch('/api/code', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'text/html'
-				},
-				body: code // Modify this string as needed
-			});
+        try {
+            console.log(typeof code);
+            let response = await fetch('/api/code', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'text/html'
+                },
+                body: code // Modify this string as needed
+            });
 
-			if (response.ok) {
-				const responseData = await response.json();
-				console.log(response);
-				if (responseData['answer'] == 'true') {
-					let lvl: number = parseInt(data.messages[0].id);
-					lvl++;
-					updateLevel(lvl);
-				}
-			} else {
-				console.error('Failed to process string');
-			}
-		} catch (error) {
-			console.error('Error processing string:', error);
-		}
-	}
+            if (response.ok) {
+                const responseData = await response.json();
+                console.log(response);
+                if (responseData['answer'] == 'true') {
+                    let lvl: number = parseInt(data.messages[0].id);
+                    lvl++;
+                    updateLevel(lvl);
+                }
+            } else {
+                console.error('Failed to process string');
+            }
+        } catch (error) {
+            console.error('Error processing string:', error);
+        }
+    }
 
 	async function sendText(text: string) {
 		try {
@@ -73,9 +73,10 @@
 			});
 
 			if (response.ok) {
-				const responseData = await response.json();
-				console.log(response);
-				if (responseData['answer'] == 'true') {
+				const responseData = await response;
+				console.log(responseData.body.getReader());
+
+				if (responseData['answer'] == true) {
 					let lvl: number = parseInt(data.messages[0].id);
 					lvl++;
 					updateLevel(lvl);
@@ -97,7 +98,7 @@
 
 			if (response.ok) {
 				const responseData = await response.json();
-				console.log(response);
+				console.log(responseData);
 			} else {
 				console.error('Failed to process string');
 			}
@@ -115,25 +116,27 @@
 	let text = `Write your answer here..`;
 </script>
 
-<main class="flex justify-between rounded-2xl border-2 main px-4 py-2">
-	{#if data.messages[0].type == '1'}
-		<div class="grid flex-1 gap-2 lg:grid-cols-2">
-			{#if buttontextindex === 1}
-				<div class="flex h-full flex-col gap-4 overflow-y-auto p-4">
-					<div class="card">
-						<h1 class="h1">Q{data.messages[0].id}: {data.messages[0].name}</h1>
-						<p class="questiondesc">{data.messages[0].description}</p>
-						<TruthTable truthTable={tb} {inputData} {outputData} />
-					</div>
+<main class="container flex flex-1 flex-col">
+	{#if data.messages[0].type === "1"}
+	
+	<div class="grid flex-1 gap-2 lg:grid-cols-2">
+		{#if buttontextindex === 1}
+			<div class="flex h-full flex-col gap-4 overflow-y-auto p-4">
+				<div class="card">
+					<h1 class="h1">Q{data.messages[0].id}: {data.messages[0].name}</h1>
+					<p class="questiondesc">{data.messages[0].description}</p>
+					<TruthTable truthTable={tb} {inputData} {outputData} />
 				</div>
+
 			{:else}
 				<div class="flex h-full flex-col gap-4 overflow-y-auto p-4">
 					<div class="card">
 						<h1 class="h1">Circuit:</h1>
 						<Visualizer width={500} height={380} shdl={value} />
 					</div>
-				</div>
-			{/if}
+
+			</div>
+		{/if}
 
 			<div class="col-span-1 my-4 hidden rounded-xl bg-primary p-4 lg:grid overflow-y-auto">
 				<CodeMirror
