@@ -72,18 +72,15 @@
         @apply h-3 w-3 rounded-sm bg-dark;
     }
 
-    
-
-
 
     :root {
-        --primary-color:#EBE5D9;
-        --title-color: #684c14;
+        --primary-color:#d9ebeb;
+        --title-color: #1d6e6e;
         --main-color: #fff;
-        --border-color: #0e2a3d;
+        --border-color: #1d6e6e;
         --color: #333;
 
-      
+        
     }
 
   body {
@@ -113,6 +110,12 @@ main, .main {
     color: var(--title-color); 
     font-size: 1.8em;
     margin-bottom: 10px;
+}
+
+.h3 {
+    color: var(--title-color); 
+    font-size: 1.4em;
+    margin-bottom: 6px;
 }
 
 p {
