@@ -19,7 +19,7 @@
     }
     .card {
         @apply flex flex-col items-start justify-center;
-        @apply border-cool rounded bg-muted;
+        @apply border-cool rounded bg-gray-200;
         @apply p-4
     }
 
@@ -83,8 +83,13 @@
         
     }
 
+    .card {
+        border-radius: 10px;
+    }
+
+
   body {
-    font-family: 'Arial', sans-serif;
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
     background-color: var(--primary-color);
     color: var(--color);
     padding: 20px;

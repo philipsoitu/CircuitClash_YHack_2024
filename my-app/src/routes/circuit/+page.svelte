@@ -130,7 +130,7 @@
 				<div class="flex h-full flex-col gap-4 overflow-y-auto p-4">
 					<div class="card">
 						<h1 class="h1">Circuit:</h1>
-						<Visualizer width={500} height={500} shdl={value} />
+						<Visualizer width={500} height={380} shdl={value} />
 					</div>
 				</div>
 			{/if}
@@ -199,7 +199,9 @@
 			<div class="flex h-full flex-col gap-4 overflow-y-auto p-4">
 				<div class="card">
 					<h1 class="h1">Q{data.messages[0].id}: {data.messages[0].name}</h1>
-					<p class="questiondesc">{data.messages[0].description}</p>
+					{#each data.messages[0].description.split("\\n\\n") as part}
+    					<p>{part}</p>
+					{/each}
 				</div>
 
 				<div class="col-span-1 my-4 hidden rounded-xl bg-primary p-4 lg:grid overflow-y-auto">
