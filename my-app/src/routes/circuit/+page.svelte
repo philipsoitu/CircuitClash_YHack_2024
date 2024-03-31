@@ -6,6 +6,7 @@
 	import { onMount } from 'svelte';
 	import TruthTable from './tablegenerate.svelte';
 	import { writable } from 'svelte/store';
+	import { stringify } from 'postcss';
 
 	let buttontext = ['Show Question', 'Show circuit'];
 	let buttontextindex = 1;
@@ -25,32 +26,52 @@
 	console.log(inputData);
 	console.log(outputData);
 	console.log(tb);
-	let response ="";
+	let response = '';
 	let value = '';
-	async function sendCode(code:string) {
-        try {
-            let response = await fetch('https://brebeufapi.vercel.app/api/besthexes', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ inputString: code }) // Modify this string as needed
-            });
+	async function sendCode(code: string) {
+		try {
+			console.log(typeof code);
+			let response = await fetch('/api/code', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'text/html'
+				},
+				body: code // Modify this string as needed
+			});
 
-            if (response.ok) {
-                const responseData = await response.json();
-				console.log(response)
-                response=responseData;
-            } else {
-                console.error('Failed to process string');
-            }
-        } catch (error) {
-            console.error('Error processing string:', error);
-        }
-    }
+			if (response.ok) {
+				const responseData = await response.json();
+				console.log(response);
+				if (responseData['answer'] == 'true') {
+					let lvl: number = parseInt(data.messages[0].id);
+					lvl++;
+					updateLevel(lvl);
+				}
+			} else {
+				console.error('Failed to process string');
+			}
+		} catch (error) {
+			console.error('Error processing string:', error);
+		}
+	}
 
+	async function updateLevel(level: number) {
+		try {
+			let response = await fetch('/api/message', {
+				method: 'POST',
+				body: JSON.stringify(level.toString()) // Modify this string as needed
+			});
 
-	
+			if (response.ok) {
+				const responseData = await response.json();
+				console.log(response);
+			} else {
+				console.error('Failed to process string');
+			}
+		} catch (error) {
+			console.error('Error processing string:', error);
+		}
+	}
 </script>
 
 <main class="container flex flex-1 flex-col">
@@ -73,22 +94,25 @@
 		{/if}
 
 		<div class="col-span-1 my-4 hidden rounded-xl bg-primary p-4 lg:grid overflow-y-auto">
-			
-					<CodeMirror
-						bind:value
-						styles={{
-							'&': {
-								width: '100%',
-								maxWidth: '100%',
-								height: '25em'
-							}
-						}}
-						theme={oneDark}
-						placeholder={'Start coding here..'}
-					/>
+			<CodeMirror
+				bind:value
+				styles={{
+					'&': {
+						width: '100%',
+						maxWidth: '100%',
+						height: '25em'
+					}
+				}}
+				theme={oneDark}
+				placeholder={'Start coding here..'}
+			/>
 
-					<button class="btn" on:click={()=>{sendCode(value)}}>Submit</button>
-				
+			<button
+				class="btn"
+				on:click={() =>
+					sendCode(JSON.stringify({ code: value, number: parseInt(data.messages[0].id) }))}
+				>Submit</button
+			>
 		</div>
 	</div>
 </main>
