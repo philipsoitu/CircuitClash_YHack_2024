@@ -1,32 +1,36 @@
-<script>
-  // @ts-ignore
-  import { SignIn, SignOut } from "@auth/sveltekit/components"
-  import { page } from "$app/stores"
+<script lang="ts">
+	// @ts-ignore
+	import { SignIn, SignOut } from '@auth/sveltekit/components';
+	import { page } from '$app/stores';
+	export let data;
+	
 </script>
 
 <h1>SvelteKit Auth Example</h1>
-<div>
-  {#if $page.data.session}
-    {#if $page.data.session.user?.image}
-      <img
-        src={$page.data.session.user.image}
-        class="avatar"
-        alt="User Avatar"
-      />
-    {/if}
-    <span class="signedInText">
-      <small>Signed in as</small><br />
-      <strong>{$page.data.session.user?.name ?? "User"}</strong>
-    </span>
-   
-  {:else}
-    <span class="notSignedInText">You are not signed in</span>
-    <SignIn>
-      <div slot="submitButton" class="buttonPrimary">Sign in</div>
-    </SignIn>
-  {/if}
+<main class="container flex flex-1 flex-col overflow-hidden ">
+	{#if data.user}
 
-   <SignOut>
-      <div slot="submitButton" class="btn">Sign out</div>
-    </SignOut>
-</div>
+		<div class="grid flex-1 gap-2 overflow-hidden lg:grid-cols-4 m-8">
+			{#each data.questions as questions}
+				<div class="card flex flex-col items-center justify-items-center gap-4">
+					<h1 class="h1 -mb-1">Question {questions.id}</h1>
+					<h2 class="">{questions.name}</h2>
+					<button class="btn">Try it out</button>
+				</div>
+
+			{/each}
+			
+
+		</div>
+	{:else}
+	<div class="mx-auto my-auto card">
+		<h1 class="h1">You are not signed in</h1>
+		<SignIn>
+			<div slot="submitButton" class="btn">Sign in</div>
+		</SignIn>
+
+	</div>
+	{/if}
+
+	
+</main>
