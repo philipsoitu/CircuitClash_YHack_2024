@@ -2,9 +2,12 @@
 	import Visualizer from '../../components/Visualizer.svelte';
 	let text1 = `INPUT A
 INPUT B
-OUTPUT C
+INPUT C
+OUTPUT Y
+OUTPUT Z
 
-AND A B C`;
+OR A B Y
+AND C A Z`;
 
 
 	let text2 = `INPUT A
