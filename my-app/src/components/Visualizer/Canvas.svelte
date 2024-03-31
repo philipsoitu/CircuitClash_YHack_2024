@@ -74,7 +74,7 @@
 
 					let initX: number = x;
 					let initY: number = y + (gate_height * (input + 1)) / (gateInputs.length + 1);
-					let targetX: number = initX - width/(layers.length+1) + gate_width;
+					let targetX: number = initX - width / (layers.length + 1) + gate_width;
 					let targetY: number =
 						(height * (layerInputs[layer_index].indexOf(gateInputs[input]) + 1)) /
 							(layerInputs[layer_index].length + 1) +
@@ -82,7 +82,16 @@
 					drawWire(initX, initY, targetX, targetY);
 				}
 
-				// for (let output = 0; output < gateInputs.length; output++) {}
+				for (let output = 0; output < gateOutputs.length; output++) {
+					if (outputs.includes(gateOutputs[output])) {
+						console.log(gateName, i, j);
+						let initX: number = x + gate_width;
+						let initY: number = y + (gate_height * (output + 1)) / (gateOutputs.length + 1);
+						let targetX: number = width - 10;
+						let targetY: number = height * (outputs.indexOf(gateOutputs[output]) + 1)/ (outputs.length + 1);
+						drawWire(initX, initY, targetX, targetY);
+					}
+				}
 			}
 		}
 
