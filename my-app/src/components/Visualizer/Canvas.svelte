@@ -72,15 +72,17 @@
 						}
 					}
 
-					let targetX: number =
-						10 +
-						(480 * layer_index) / layerInputs[layer_index].length -
-						(layer_index * gate_width) / 2;
+					let initX: number = x;
+					let initY: number = y + (gate_height * (input + 1)) / (gateInputs.length + 1);
+					let targetX: number = initX - width/(layers.length+1) + gate_width;
 					let targetY: number =
 						(height * (layerInputs[layer_index].indexOf(gateInputs[input]) + 1)) /
-						(layerInputs[layer_index].length + 1) + ((layer_index>=1) ? gate_height/2 : 0);
-					drawWire(x, y + (gate_height * (input + 1)) / (gateInputs.length + 1), targetX, targetY);
+							(layerInputs[layer_index].length + 1) +
+						(layer_index >= 1 ? gate_height / 2 : 0);
+					drawWire(initX, initY, targetX, targetY);
 				}
+
+				// for (let output = 0; output < gateInputs.length; output++) {}
 			}
 		}
 
