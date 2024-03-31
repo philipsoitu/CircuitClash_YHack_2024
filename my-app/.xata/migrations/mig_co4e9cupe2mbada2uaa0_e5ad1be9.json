@@ -1,0 +1,16 @@
+{
+  "id": "mig_co4e9cupe2mbada2uaa0",
+  "parentID": "mig_co4cbmepe2mbada2u9d0",
+  "checksum": "1:e5ad1be9809c3e814f6012675068790bebafac188ed845bbabe82e87587f976b",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "io",
+          "type": "string"
+        },
+        "table": "questions"
+      }
+    }
+  ]
+}
