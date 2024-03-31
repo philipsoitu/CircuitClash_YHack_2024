@@ -18,7 +18,7 @@
 	class="flex justify-between rounded-2xl border-2 main px-4 py-2"
 >
 	<a class="flex items-center gap-2" href="/">
-		<h1 class="h1 mt-4">Circuit</h1>
+		<h1 class="h1 mt-4">Circuit Clash</h1>
 	</a>
 
 	<div class="flex items-center gap-4">

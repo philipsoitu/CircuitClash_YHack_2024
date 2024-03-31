@@ -1,33 +1,36 @@
+INPUT A0
+INPUT A1
+INPUT A2
+INPUT B0 
+INPUT B1
+INPUT B2
+OUTPUT S0 
+OUTPUT S1
+OUTPUT S2 
+OUTPUT Cout
+WIRE C0, C1, C2
 
-INPUT I01
-INPUT I02
-OUTPUT O01
-OUTPUT O02
-WIRE T1
-WIRE T2
-
-STARTGATE MYXOR INPUT X INPUT Y OUTPUT Z
-
-    WIRE T1
-    WIRE T2
-    WIRE T3
-    WIRE T4
-    WIRE T5
-    WIRE T6
-    WIRE T7
-
+// Define the basic XOR gate used in the MYXOR gate
+STARTGATE XOR INPUT X INPUT Y OUTPUT Z
     OR X Y T1
     AND X Y T2
     NOT T2 T3
     AND T1 T3 Z
-
 ENDGATE
 
-STARTGATE ADDER INPUT X INPUT Y OUTPUT Z OUTPUT I
-    
-    MYXOR X Y Z
-    AND X Y I
-
+// Define a Full Adder that uses the XOR gate, taking into account the carry
+STARTGATE FULLADDER INPUT X INPUT Y INPUT Cin OUTPUT S OUTPUT Cout
+    XOR X Y TEMP1
+    XOR TEMP1 Cin S
+    AND X Y TEMP2
+    AND Cin TEMP1 TEMP3
+    OR TEMP2 TEMP3 Cout
 ENDGATE
 
-ADDER I01 I02 O01 O02
+// Instantiate Full Adders for each bit
+FULLADDER A0 B0 0 S0 C0
+FULLADDER A1 B1 C0 S1 C1
+FULLADDER A2 B2 C1 S2 C2
+
+// The carry out from the last addition is the overflow
+ASSIGN C2 Cout

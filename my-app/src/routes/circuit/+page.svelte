@@ -54,6 +54,8 @@
                     lvl++;
                     updateLevel(lvl);
                 }
+			} else if (response.status === 418) {
+      			alert('The server is a teapot!'); // Custom message for status 418
             } else {
                 console.error('Failed to process string');
             }
@@ -183,7 +185,7 @@
 						<button
 							class="btn"
 							on:click={() =>
-								sendCode(JSON.stringify({ code: value, number: parseInt(data.messages[0].id) }))}
+								sendCode(JSON.stringify({ code: value, number: parseInt(data.messages[0].id),email: session.user.email }))}
 							>Submit</button
 						>
 					</div>

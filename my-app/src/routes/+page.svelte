@@ -10,7 +10,7 @@
 
 
 	{#if data.user}
-	<main class="flex justify-between rounded-2xl border-2 main px-4 py-2">
+	<main class="flex justify-between rounded-2xl border-2 main px-2 py-1">
 		<div class="grid flex-1 gap-2 overflow-hidden lg:grid-cols-4 m-8">
 			{#each data.questions as question, index (question.id)}
 				{#if data.level.levelnumber == index + 1} 
