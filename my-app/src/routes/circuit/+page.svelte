@@ -5,6 +5,7 @@
 	import SuperDebug, { superForm } from 'sveltekit-superforms';
 	import { onMount } from 'svelte';
 	import TruthTable from './tablegenerate.svelte';
+	import { writable } from 'svelte/store';
 
 	let buttontext = ['Show Question', 'Show circuit'];
 	let buttontextindex = 1;
@@ -13,7 +14,6 @@
 	let qnum = 1;
 
 	export let data;
-	export let form;
 
 	// Assuming data.messages[0].io contains structured data you might need to separate or process further
 	console.log(data.messages[0].io);
@@ -25,7 +25,29 @@
 	console.log(inputData);
 	console.log(outputData);
 	console.log(tb);
+	let response ="";
 	let value = '';
+	async function sendCode(code:string) {
+        try {
+            let response = await fetch('https://brebeufapi.vercel.app/api/besthexes', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ inputString: code }) // Modify this string as needed
+            });
+
+            if (response.ok) {
+                const responseData = await response.json();
+				console.log(response)
+                response=responseData;
+            } else {
+                console.error('Failed to process string');
+            }
+        } catch (error) {
+            console.error('Error processing string:', error);
+        }
+    }
 
 
 	
@@ -64,6 +86,8 @@
 						theme={oneDark}
 						placeholder={'Start coding here..'}
 					/>
+
+					<button class="btn" on:click={()=>{sendCode(value)}}>Submit</button>
 				
 		</div>
 	</div>

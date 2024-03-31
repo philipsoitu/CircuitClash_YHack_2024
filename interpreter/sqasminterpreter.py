@@ -31,7 +31,7 @@ class SQASMInterpreter:
             elif parts[0] == 'CX':
                 qbit1 = int(re.sub('\D', '', (parts[1])))
                 qbit2 = int(re.sub('\D', '', (parts[2])))
-                control, target = map( qbit1, qbit2)
+                control, target = map(int, qbit1, qbit2)
                 self.apply_cnot(control, target)
             elif parts[0] == 'measure':
                 qubit_idx, classical_idx = map(int, [parts[1][2:-1], parts[3][2:-1]])
