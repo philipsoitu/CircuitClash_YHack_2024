@@ -6,6 +6,17 @@
 	export let data;
 	
 
+	import SuperDebug from 'sveltekit-superforms';
+	import { onMount } from 'svelte';
+	import TruthTable from './tablegenerate.svelte'
+	const inputData = ['I01', 'I02'];
+	const outputData = ['O01', 'O02'];
+	const truthTable = [
+		{'I01': 0, 'I02': 0, 'O01': 0, 'O02': 0},
+		{'I01': 0, 'I02': 1, 'O01': 1, 'O02': 0},
+		{'I01': 1, 'I02': 0, 'O01': 1, 'O02': 0},
+		{'I01': 1, 'I02': 1, 'O01': 0, 'O02': 1}
+	];
 	let value = '';
 </script>
 
@@ -20,7 +31,7 @@
 				<div class="card">
 					<h1 class="h1">What you need to do</h1>
 					<p>Put</p>
-				</div>
+					<TruthTable {inputData} {outputData} {truthTable} />				</div>
 				<div class="card"></div>
 			</div>
 		</div>
