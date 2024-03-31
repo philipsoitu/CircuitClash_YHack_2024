@@ -1,0 +1,211 @@
+<script>
+    // No extra imports needed for basic text and tables
+</script>
+<main>
+   <h1 class="h1">What is Circuit Clash?</h1>
+   <p>
+      Circuit Clash is an online platform meant for young students and enthusiasts interested in learning about boolean logic and logic circuits. It allows you to write code in our custom language, SHDL, which is a simplified VHDL, perfect for the use of curious young enthusiasts. With Circuit Clash, you will write code, and we will draw the circuit for you in real time, allowing you to see the logic gates at work.
+   </p>
+   <br>
+   <h1 class="h1">What is SHDL?</h1>
+   <p>
+      SHDL, or the Simple High-Speed Integrated Circuit Hardware Description Language, is a simplified version of VHDL. While VHDL is excellent for professional use, its strict syntax makes it less suitable as an entry point for kids learning about boolean logic. SHDL offers a more intuitive syntax, making it easier for beginners to grasp the concepts.
+   </p>
+   <br>
+   <h1 class="h1">How does it work?</h1>
+   <p>
+      Before explaining the syntax for SHDL, it is better to know how logic gates work. If you already know about them you can skip to the SHDL Docs. 
+   </p>
+   <br>
+   <h1 class="h1">Logic Gates</h1>
+   <h2 class="h2">NOT Gate</h2>
+   <p>The NOT gate (also called an inverter) has only one input. It outputs the opposite state of its input.</p>
+   <table>
+      <thead>
+         <tr>
+            <th>A</th>
+            <th>OUTPUT</th>
+         </tr>
+      </thead>
+      <tbody>
+         <tr>
+            <td>0</td>
+            <td>1</td>
+         </tr>
+         <tr>
+            <td>1</td>
+            <td>0</td>
+         </tr>
+      </tbody>
+   </table>
+   <br>
+   <h2 class="h2">AND Gate</h2>
+   <p>The AND gate outputs true (1) only when both of its inputs are true. Its truth table is:</p>
+   <table>
+      <thead>
+         <tr>
+            <th>A</th>
+            <th>B</th>
+            <th>OUTPUT</th>
+         </tr>
+      </thead>
+      <tbody>
+         <tr>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+         </tr>
+         <tr>
+            <td>0</td>
+            <td>1</td>
+            <td>0</td>
+         </tr>
+         <tr>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+         </tr>
+         <tr>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+         </tr>
+      </tbody>
+   </table>
+   <br>
+   <h2 class="h2">NAND Gate</h2>
+   <p>The NAND gate outputs false (0) only when both of its inputs are true. It is the inverse of the AND gate.</p>
+   <table>
+      <thead>
+         <tr>
+            <th>A</th>
+            <th>B</th>
+            <th>OUTPUT</th>
+         </tr>
+      </thead>
+      <tbody>
+         <tr>
+            <td>0</td>
+            <td>0</td>
+            <td>1</td>
+         </tr>
+         <tr>
+            <td>0</td>
+            <td>1</td>
+            <td>1</td>
+         </tr>
+         <tr>
+            <td>1</td>
+            <td>0</td>
+            <td>1</td>
+         </tr>
+         <tr>
+            <td>1</td>
+            <td>1</td>
+            <td>0</td>
+         </tr>
+      </tbody>
+   </table>
+   <br>
+   <h2 class="h2">OR Gate</h2>
+   <p>The OR gate outputs true (1) whenever at least one of its inputs is true. </p>
+   <table>
+      <thead>
+         <tr>
+            <th>A</th>
+            <th>B</th>
+            <th>OUTPUT</th>
+         </tr>
+      </thead>
+      <tbody>
+         <tr>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+         </tr>
+         <tr>
+            <td>0</td>
+            <td>1</td>
+            <td>1</td>
+         </tr>
+         <tr>
+            <td>1</td>
+            <td>0</td>
+            <td>1</td>
+         </tr>
+         <tr>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+         </tr>
+      </tbody>
+   </table>
+   <br>
+   <h2 class="h2">NOR Gate</h2>
+   <p>The NOR gate outputs true (1) only when both of its inputs are false (0). It is the inverse of the OR gate.</p>
+   <table>
+      <thead>
+         <tr>
+            <th>A</th>
+            <th>B</th>
+            <th>OUTPUT</th>
+         </tr>
+      </thead>
+      <tbody>
+         <tr>
+            <td>0</td>
+            <td>0</td>
+            <td>1</td>
+         </tr>
+         <tr>
+            <td>0</td>
+            <td>1</td>
+            <td>0</td>
+         </tr>
+         <tr>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+         </tr>
+         <tr>
+            <td>1</td>
+            <td>1</td>
+            <td>0</td>
+         </tr>
+      </tbody>
+   </table>
+   <br>
+   <h2 class="h2">XOR Gate</h2>
+   <p>The XOR (exclusive OR) gate outputs true (1) only when its inputs are different.</p>
+   <table>
+      <thead>
+         <tr>
+            <th>A</th>
+            <th>B</th>
+            <th>OUTPUT</th>
+         </tr>
+      </thead>
+      <tbody>
+         <tr>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+         </tr>
+         <tr>
+            <td>0</td>
+            <td>1</td>
+            <td>1</td>
+         </tr>
+         <tr>
+            <td>1</td>
+            <td>0</td>
+            <td>1</td>
+         </tr>
+         <tr>
+            <td>1</td>
+            <td>1</td>
+            <td>0</td>
+         </tr>
+      </tbody>
+   </table>
+</main>

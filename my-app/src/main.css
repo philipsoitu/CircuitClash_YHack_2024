@@ -72,4 +72,17 @@
         @apply absolute -z-10 rotate-45;
         @apply h-3 w-3 rounded-sm bg-dark;
     }
+
+    /* -------- Table Styles -------- */
+  th { 
+    @apply text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 px-6 py-3;
+  }
+
+  td, th {
+    @apply border-b dark:border-gray-700;
+  }
+
+  tbody tr {
+    @apply text-gray-900 px-6 py-4 font-medium whitespace-nowrap;
+  }
 }
