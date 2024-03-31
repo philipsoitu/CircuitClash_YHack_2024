@@ -6,7 +6,6 @@
 	import { onMount } from 'svelte';
 	import TruthTable from './tablegenerate.svelte';
 	import { writable } from 'svelte/store';
-
 	let buttontext = ['Show Question', 'Show circuit'];
 	let buttontextindex = 1;
 	let description = 'Define the functionality of a full 1-bit adder in shdl.';
@@ -27,25 +26,25 @@
 	console.log(tb);
 	let response ="";
 	let value = '';
-	async function sendCode(code:string) {
+	async function sendCode(code: string, number: number): Promise<void> {
         try {
-            let response = await fetch('https://brebeufapi.vercel.app/api/besthexes', {
+            const response = await fetch('https://brebeufapi.vercel.app/api/besthexes', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'text/html'
                 },
-                body: JSON.stringify({ inputString: code }) // Modify this string as needed
+                body: JSON.stringify({ code: code, number: number })
             });
 
-            if (response.ok) {
-                const responseData = await response.json();
-				console.log(response)
-                response=responseData;
-            } else {
-                console.error('Failed to process string');
+            if (!response.ok) {
+                console.error('Failed to send code. Status:', response.status);
+                return;
             }
+
+            const responseData = await response.json();
+            console.log('Response:', responseData);
         } catch (error) {
-            console.error('Error processing string:', error);
+            console.error('Error sending code:', error);
         }
     }
 
@@ -87,7 +86,7 @@
 						placeholder={'Start coding here..'}
 					/>
 
-					<button class="btn" on:click={()=>{sendCode(value)}}>Submit</button>
+					<button class="btn" on:click={()=>{sendCode(value,parseInt(data.messages[0].id))}}>Submit</button>
 				
 		</div>
 	</div>
