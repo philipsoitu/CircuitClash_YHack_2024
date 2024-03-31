@@ -36,31 +36,31 @@
 	let response = '';
 	let value = '';
 	async function sendCode(code: string) {
-		try {
-			let response = await fetch('/api/code', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'text/html'
-				},
-				body: code // Modify this string as needed
-			});
+        try {
+            console.log(typeof code);
+            let response = await fetch('/api/code', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'text/html'
+                },
+                body: code // Modify this string as needed
+            });
 
-			if (response.ok) {
-				const responseData = await response;
-				console.log(responseData.body.getReader());
-
-				if (responseData['answer'] == true) {
-					let lvl: number = parseInt(data.messages[0].id);
-					lvl++;
-					updateLevel(lvl);
-				}
-			} else {
-				console.error('Failed to process string');
-			}
-		} catch (error) {
-			console.error('Error processing string:', error);
-		}
-	}
+            if (response.ok) {
+                const responseData = await response.json();
+                console.log(response);
+                if (responseData['answer'] == 'true') {
+                    let lvl: number = parseInt(data.messages[0].id);
+                    lvl++;
+                    updateLevel(lvl);
+                }
+            } else {
+                console.error('Failed to process string');
+            }
+        } catch (error) {
+            console.error('Error processing string:', error);
+        }
+    }
 
 	async function sendText(text: string) {
 		try {
