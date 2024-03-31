@@ -18,10 +18,13 @@
     .border-cool {
         @apply border-2 border-dark shadow-square;
     }
-
+    .questiondesc {
+        @apply pb-2
+    }
     .card {
         @apply flex flex-col items-start justify-center;
         @apply border-cool rounded bg-muted;
+        @apply p-4
     }
 
     .btn {
