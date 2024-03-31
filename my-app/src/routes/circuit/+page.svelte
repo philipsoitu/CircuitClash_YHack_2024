@@ -20,16 +20,14 @@
 	let outputData = ioData.output; // Hypothetical structure
 	let tb = JSON.parse((data.messages[0].expectedoutput).replace(/'/g, '"')); // Ensure this is correctly structured for parsing
 
-	console.log(tb);
 	console.log(inputData);
-	console.log(outputData);
-
+	console.log(outputData)
+	console.log(tb)
 	let value = '';
 
 	function changeText() {
 		buttontextindex = buttontextindex === 0 ? 1 : 0;
 	}
-
 </script>
 
 
@@ -41,7 +39,7 @@
 					<div class="card">
 						<h1 class="h1">Q{data.messages[0].id}: {data.messages[0].name}</h1>
 						<p class="questiondesc">{data.messages[0].description}</p>
-						<TruthTable {tb} {inputData} {outputData}/>
+						<TruthTable truthTable={tb} {inputData} {outputData}/>
 					</div>
 
 			</div>
@@ -51,6 +49,7 @@
 				<h1 class="h1">Circuit:</h1>
 				<Visualizer width={500} height = {500} shdl= {value}/>
 			</div>
+
 	</div>
 
 		{/if}
