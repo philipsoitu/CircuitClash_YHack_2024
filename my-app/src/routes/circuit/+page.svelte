@@ -72,13 +72,61 @@
 			console.error('Error processing string:', error);
 		}
 	}
+	function changeText() {
+		if (buttontextindex === 0) {
+			buttontextindex = 1;
+		} else {
+			buttontextindex = 0;
+		}
+	}
 </script>
 
 <main class="container flex flex-1 flex-col">
-	{#if data.messages[0].type === "2"}
-	
-	<div class="grid flex-1 gap-2 lg:grid-cols-2">
-		{#if buttontextindex === 1}
+	{#if data.messages[0].type == '1'}
+		<div class="grid flex-1 gap-2 lg:grid-cols-2">
+			{#if buttontextindex === 1}
+				<div class="flex h-full flex-col gap-4 overflow-y-auto p-4">
+					<div class="card">
+						<h1 class="h1">Q{data.messages[0].id}: {data.messages[0].name}</h1>
+						<p class="questiondesc">{data.messages[0].description}</p>
+						<TruthTable truthTable={tb} {inputData} {outputData} />
+					</div>
+				</div>
+			{:else}
+				<div class="flex h-full flex-col gap-4 overflow-y-auto p-4">
+					<div class="card">
+						<h1 class="h1">Circuit:</h1>
+						<Visualizer width={500} height={500} shdl={value} />
+					</div>
+				</div>
+			{/if}
+
+			<div class="col-span-1 my-4 hidden rounded-xl bg-primary p-4 lg:grid overflow-y-auto">
+				<CodeMirror
+					bind:value
+					styles={{
+						'&': {
+							width: '100%',
+							maxWidth: '100%',
+							height: '25em'
+						}
+					}}
+					theme={oneDark}
+					placeholder={'Start coding here..'}
+				/>
+				<div>
+					<button
+						class="btn"
+						on:click={() =>
+							sendCode(JSON.stringify({ code: value, number: parseInt(data.messages[0].id) }))}
+						>Submit</button
+					>
+					<button class="btn mt-4" on:click={changeText}>{buttontext[buttontextindex]}</button>
+				</div>
+			</div>
+		</div>
+	{:else if data.messages[0].type == '2'}
+		<div class="grid flex-1 gap-2 lg:grid-cols-2">
 			<div class="flex h-full flex-col gap-4 overflow-y-auto p-4">
 				<div class="card">
 					<h1 class="h1">Q{data.messages[0].id}: {data.messages[0].name}</h1>
@@ -86,76 +134,14 @@
 					<TruthTable truthTable={tb} {inputData} {outputData} />
 				</div>
 			</div>
-		{:else}
+
 			<div class="flex h-full flex-col gap-4 overflow-y-auto p-4">
 				<div class="card">
 					<h1 class="h1">Circuit:</h1>
 					<Visualizer width={500} height={500} shdl={value} />
 				</div>
 			</div>
-		{/if}
-
-		<div class="col-span-1 my-4 hidden rounded-xl bg-primary p-4 lg:grid overflow-y-auto">
-			<CodeMirror
-				bind:value
-				styles={{
-					'&': {
-						width: '100%',
-						maxWidth: '100%',
-						height: '25em'
-					}
-				}}
-				theme={oneDark}
-				placeholder={'Start coding here..'}
-			/>
-
-			<button
-				class="btn"
-				on:click={() =>
-					sendCode(JSON.stringify({ code: value, number: parseInt(data.messages[0].id) }))}
-				>Submit</button
-			>
 		</div>
-	</div>
-{:else if data.messages[0].type === "1"}
-<div class="grid flex-1 gap-2 lg:grid-cols-2">
-		<div class="flex h-full flex-col gap-4 overflow-y-auto p-4">
-			<div class="card">
-				<h1 class="h1">Q{data.messages[0].id}: {data.messages[0].name}</h1>
-				<p class="questiondesc">{data.messages[0].description}</p>
-				<TruthTable truthTable={tb} {inputData} {outputData} />
-			</div>
-		</div>
-	
-
-	
-	<div class="flex h-full flex-col gap-4 overflow-y-auto p-4">
-		<div class="card">
-			<h1 class="h1">Circuit:</h1>
-			<Visualizer width={500} height={500} shdl={value} />
-		</div>
-	</div>
-</div>
-
-
-
-
-
-{:else}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-{/if}
+		<button class="btn mt-4" on:click={changeText}>{buttontext[buttontextindex]}</button>
+	{:else}{/if}
 </main>
