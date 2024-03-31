@@ -21,51 +21,55 @@
 
 	onMount(() => {
 		ctx = canvas.getContext('2d');
-		console.log(layerInitializer());
 		render();
-		layerInitializer();
 	});
 
 	function render() {
-		//variables
 		let trimmedString = parseText(shdl);
 		inputs = parseInput(trimmedString);
 		outputs = parseOutput(trimmedString);
 		wires = parseWire(trimmedString);
 		gates = parseGates(shdl);
 
-		//positional
-		let x = 200;
-		let y = 100;
+		let layers: string[][] = layerInitializer();
+
+		let x: number;
+		let y: number;
 		let gate_width = 60;
 		let gate_height = 40;
 		let fontSize = 12;
 
+		for (let i = 0; i < layers.length; i++) {
+			let layer = layers[i];
+
+			for (let j = 0; j < layer.length; j++) {
+				x = (width * (i + 1)) / (layers.length + 1);
+				y = (height * (j + 1)) / (layer.length + 1);
+
+				let gateInfo = layer[j].split(' ');
+				let gateName = gateInfo[0];
+				let gateInputs: string[];
+				let gateOutputs: string[];
+				if (gateName === 'AND' || gateInfo[0] === 'OR' || gateInfo[0] === 'XOR') {
+					gateInputs = gateInfo.slice(1, 3);
+					gateOutputs = [gateInfo[3]];
+					drawGate(gateName, x, y, gate_width, gate_height, fontSize, gateInputs, gateOutputs);
+				} else if (gateName === 'NOT') {
+					gateInputs = [gateInfo[1]];
+					gateOutputs = [gateInfo[2]];
+					drawGate(gateName, x, y, gate_width, gate_height, fontSize, gateInputs, gateOutputs);
+				} else {
+					gateInputs = [];
+					gateOutputs = [];
+					//custom gate
+				}
+				
+				
+			}
+		}
+
 		drawInputs(inputs);
 		drawOutputs(outputs);
-
-		let i: number;
-		gates.forEach((gate) => {
-			let gateInfo = gate.split(' ');
-			let gateName = gateInfo[0];
-			let gateInputs;
-			let gateOutputs;
-
-			if (gateName === 'AND' || gateInfo[0] === 'OR' || gateInfo[0] === 'XOR') {
-				gateInputs = gateInfo.slice(1, 3);
-				gateOutputs = [gateInfo[3]];
-				drawGate(gateName, x, y, gate_width, gate_height, fontSize, gateInputs, gateOutputs);
-			} else if (gateName === 'NOT') {
-				gateInputs = [gateInfo[1]];
-				gateOutputs = [gateInfo[2]];
-				drawGate(gateName, x, y, gate_width, gate_height, fontSize, gateInputs, gateOutputs);
-			} else {
-				//custom gate fuck fuck fuck
-				alert('FUUUUCCCCKCKKKassfjasijasifjasfasfhjf');
-			}
-
-			y = y + 100;
-		});
 	}
 
 	function layerInitializer() {
