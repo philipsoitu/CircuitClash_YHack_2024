@@ -1,5 +1,5 @@
 <script>
-	import Visualizer from '../../components/Visualizer.svelte';
+	import Visualizer from '../../components/Visualizer/Visualizer.svelte';
 	let text1 = `INPUT A
 INPUT B
 OUTPUT Z

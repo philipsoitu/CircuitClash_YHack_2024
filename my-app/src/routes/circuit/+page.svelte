@@ -1,7 +1,7 @@
 <script lang="ts">
 	import CodeMirror from 'svelte-codemirror-editor';
 	import { oneDark } from '@codemirror/theme-one-dark';
-	import Visualizer from '../../components/Visualizer.svelte';
+	import Visualizer from '../../components/Visualizer/Visualizer.svelte';
 	import SuperDebug, { superForm } from 'sveltekit-superforms';
 	import { onMount } from 'svelte';
 	import TruthTable from './tablegenerate.svelte';
@@ -75,6 +75,8 @@
 </script>
 
 <main class="container flex flex-1 flex-col">
+	{#if data.messages[0].type === "2"}
+	
 	<div class="grid flex-1 gap-2 lg:grid-cols-2">
 		{#if buttontextindex === 1}
 			<div class="flex h-full flex-col gap-4 overflow-y-auto p-4">
@@ -115,4 +117,45 @@
 			>
 		</div>
 	</div>
+{:else if data.messages[0].type === "1"}
+<div class="grid flex-1 gap-2 lg:grid-cols-2">
+		<div class="flex h-full flex-col gap-4 overflow-y-auto p-4">
+			<div class="card">
+				<h1 class="h1">Q{data.messages[0].id}: {data.messages[0].name}</h1>
+				<p class="questiondesc">{data.messages[0].description}</p>
+				<TruthTable truthTable={tb} {inputData} {outputData} />
+			</div>
+		</div>
+	
+
+	
+	<div class="flex h-full flex-col gap-4 overflow-y-auto p-4">
+		<div class="card">
+			<h1 class="h1">Circuit:</h1>
+			<Visualizer width={500} height={500} shdl={value} />
+		</div>
+	</div>
+</div>
+
+
+
+
+
+{:else}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{/if}
 </main>

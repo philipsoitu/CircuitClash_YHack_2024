@@ -13,7 +13,7 @@
 
 		<div class="grid flex-1 gap-2 overflow-hidden lg:grid-cols-4 m-8">
 			{#each data.questions as question, index (question.id)}
-				{#if data.level.levelnumber >= index + 1} <!-- Adjust if your indexing/level logic is different -->
+				{#if data.level.levelnumber == index + 1} 
 					<div class="card flex flex-col items-center justify-items-center gap-4">
 					<h1 class="h1 -mb-1">Question {question.id}</h1>
 					<h2 class="">{question.name}</h2>
