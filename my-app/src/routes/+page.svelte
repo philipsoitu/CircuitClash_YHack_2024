@@ -8,9 +8,9 @@
 	console.log(data.level.levelnumber)
 </script>
 
-<main class="container flex flex-1 flex-col overflow-hidden ">
-	{#if data.user}
 
+	{#if data.user}
+	<main class="flex justify-between rounded-2xl border-2 main px-4 py-2">
 		<div class="grid flex-1 gap-2 overflow-hidden lg:grid-cols-4 m-8">
 			{#each data.questions as question, index (question.id)}
 				{#if data.level.levelnumber == index + 1} 
@@ -28,17 +28,18 @@
 				{/if}
 			{/each}
 			
-
+		
 		</div>
+	</main>
 	{:else}
-	<div class="mx-auto my-auto card items-center">
-		<h1 class="h1">You are not signed in</h1>
+	<div class="mx-auto my-auto card items-center sign-in-box">
+		<h1 class="h1 mt-2">You are not signed in</h1>
 		<SignIn>
-			<div slot="submitButton" class="btn">Sign in</div>
+			<div slot="submitButton" class="btn mb-2">Sign in</div>
 		</SignIn>
 
 	</div>
 	{/if}
 
 	
-</main>
+
