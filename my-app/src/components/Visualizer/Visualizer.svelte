@@ -5,19 +5,14 @@
 	export let height: number;
 	export let shdl: string;
 
-	let possibleViewers: string[];
-	let currentViewer: string;
+	let possibleViewers: string[] = ['main'];
+	let currentViewer: number = 0;
 	function generatePossibleViewers() {}
 </script>
 
 <div>
 	{#each possibleViewers as possibleViewer, i}
-		<button
-			aria-current={selected === color}
-			aria-label={color}
-			style="background: {color}"
-			on:click={() => (selected = color)}>{i + 1}</button
-		>
+		<button>{possibleViewers[i]}</button>
 	{/each}
 </div>
 <Canvas {width} {height} {shdl} />
