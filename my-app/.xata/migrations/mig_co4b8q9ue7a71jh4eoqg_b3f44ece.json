@@ -1,0 +1,11 @@
+{
+  "id": "mig_co4b8q9ue7a71jh4eoqg",
+  "checksum": "1:b3f44ece9a8735956c3b9d7ef520ccb5f8a56bfee848bd30fe4690289a530d81",
+  "operations": [
+    {
+      "addTable": {
+        "table": "levels"
+      }
+    }
+  ]
+}

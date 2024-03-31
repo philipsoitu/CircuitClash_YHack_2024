@@ -1,0 +1,16 @@
+{
+  "id": "mig_co4b8tupe2mbada2u960",
+  "parentID": "mig_co4b8q9ue7a71jh4eoqg",
+  "checksum": "1:14cda3cf0df65e77def196975edee20559d7033f32ae824dad4c07ff43bd248d",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "name",
+          "type": "string"
+        },
+        "table": "levels"
+      }
+    }
+  ]
+}
