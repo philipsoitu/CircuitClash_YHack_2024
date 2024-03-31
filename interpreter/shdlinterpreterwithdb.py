@@ -264,6 +264,8 @@ def shdltruthtable(shdl_code):
         elif parts[0] in ["OUTPUT"]:
             outputvars.append(parts[1])
         # Generate all possible input combinations
+    iohash = {"input": inputvars, "output": outputvars}
+    print(iohash)
     num_inputs = len(inputvars)
     input_combinations = list(product([0, 1], repeat=num_inputs))
     truth_table = [dict(zip(inputvars, combination)) for combination in input_combinations]
