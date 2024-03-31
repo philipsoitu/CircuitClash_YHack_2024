@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import { LayoutBottombarCollapse } from 'tabler-icons-svelte';
 
 	export let width: number = 500;
 	export let height: number = 500;
@@ -15,11 +16,16 @@
 	let wires: string[];
 	let gates: string[];
 
+	//gate positioning 
+	let layerConnections: string[][]
+
 	onMount(() => {
 		ctx = canvas.getContext('2d');
 
 		render();
 	});
+
+
 
 	function render() {
 		//variables
@@ -39,7 +45,7 @@
 		drawInputs(inputs);
 		drawOutputs(outputs);
 
-		let i = 1;
+		let i: number;
 		gates.forEach((gate) => {
 			let gateInfo = gate.split(' ');
 			let gateName = gateInfo[0];
@@ -59,43 +65,22 @@
 				alert('FUUUUCCCCKCKKKassfjasijasifjasfasfhjf');
 			}
 
-			//inputs
-			let inputslength = inputs.length + 1;
-			let gateinputslength = gateInputs.length + 1;
-			gateInputs.forEach((input) => {
-				i = inputs.indexOf(input);
-				if (i !== -1) {
-					drawWire(
-						x,
-						y + (gate_height * (i + 1)) / gateinputslength,
-						10,
-						(height * (i + 1)) / inputslength
-					);
-				} else {
-					alert('FUUUUCCCCKCKKK');
-				}
-			});
-
-			//outputs
-			let outputlength = outputs.length + 1;
-			let gateoutputlength = gateOutputs?.length + 1;
-			i = 1;
-			gateOutputs.forEach((output) => {
-				i = outputs.indexOf(output);
-				if (i !== -1) {
-					drawWire(
-						x + gate_width,
-						y + (gate_height * (i + 1)) / gateoutputlength,
-						width - 10,
-						(height * (i + 1)) / outputlength
-					);
-				} else {
-					alert('FUUUUCCCCKCKKK');
-				}
-			});
 
 			y = y + 100;
 		});
+	}
+
+	function layerInitializer() {
+		let trimmedString = parseText(shdl);
+		inputs = parseInput(trimmedString);
+		outputs = parseOutput(trimmedString);
+		wires = parseWire(trimmedString);
+		gates = parseGates(shdl);
+
+		layerConnections[0] = inputs
+
+
+		
 	}
 
 	//parser functions
@@ -159,7 +144,7 @@
 
 		// Filter out lines starting with INPUT or OUTPUT
 		const otherLines = lines.filter(
-			(line) => !line.startsWith('INPUT') && !line.startsWith('OUTPUT')
+			(line) => !line.startsWith('INPUT') && !line.startsWith('OUTPUT') && !line.startsWith('WIRE')
 		);
 
 		// Combining other lines and gates
