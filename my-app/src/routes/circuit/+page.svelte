@@ -1,9 +1,4 @@
 <script lang="ts">
-	import { superForm } from 'sveltekit-superforms';
-	import { Field, Control } from 'formsnap';
-	import { Label } from 'formsnap';
-	import { zodClient } from 'sveltekit-superforms/adapters';
-	import type { PageData } from './$types.js';
 
 	import CodeMirror from 'svelte-codemirror-editor';
 	import { oneDark } from '@codemirror/theme-one-dark';
