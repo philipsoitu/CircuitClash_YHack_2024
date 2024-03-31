@@ -1,7 +1,7 @@
 <script lang="ts">
 	import CodeMirror from 'svelte-codemirror-editor';
 	import { oneDark } from '@codemirror/theme-one-dark';
-	import Visualizer from '../../components/Visualizer.svelte';
+	import Visualizer from '../../components/Visualizer/Visualizer.svelte';
 	import SuperDebug, { superForm } from 'sveltekit-superforms';
 	import { onMount } from 'svelte';
 	import TruthTable from './tablegenerate.svelte';
@@ -48,11 +48,19 @@
         }
     }
 
-
+	function changeText() {
+		if (buttontextindex === 0){
+			buttontextindex = 1
+		}
+		else{
+			buttontextindex = 0
+		}
+	}
 	
 </script>
 
 <main class="container flex flex-1 flex-col">
+
 	<div class="grid flex-1 gap-2 lg:grid-cols-2">
 		{#if buttontextindex === 1}
 			<div class="flex h-full flex-col gap-4 overflow-y-auto p-4">
@@ -87,7 +95,7 @@
 					/>
 
 					<button class="btn" on:click={()=>{sendCode(value,parseInt(data.messages[0].id))}}>Submit</button>
-				
+					<button class="btn mt-4" on:click={changeText}>{buttontext[buttontextindex]}</button>
 		</div>
 	</div>
 </main>
