@@ -27,7 +27,8 @@ export const load: PageServerLoad = async ({locals}) => {
 	const questions = await getXataClient().db.questions.getAll();
 
     return {
-    	questions,level
+    	questions,
+        level: existingUser.levelnumber
     };
 
 };

@@ -303,7 +303,7 @@ a = shdltruthtable(shdl_code)
 
 
 apiinput = {"code": shdl_code,
-            "number": 1}
+            "number": 3}
 
 try:
     resp = xata.records().get("questions", apiinput["number"])
