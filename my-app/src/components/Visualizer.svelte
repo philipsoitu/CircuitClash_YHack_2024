@@ -15,28 +15,42 @@
 	});
 
 	function draw() {
-		if (ctx === null) {
-			console.error('Failed to get 2D context for canvas.');
-		} else {
-			// Set line width
-			ctx.lineWidth = 10;
+		// drawGate('nand', 100, 100);
+		drawWire(10, 400, 100, 450, "yo");
 
-			// Wall
-			ctx.strokeRect(75, 140, 150, 110);
+        alert(shdl)
+	}
 
-			// Door
-			ctx.fillRect(130, 190, 40, 60);
+    //parser functions
+    
 
-			// Roof
+
+	//helper render functions
+	function drawGate(x: number, y: number, width: number = 100, height: number = 50, name: string) {
+		if (ctx !== null) {
 			ctx.beginPath();
-			ctx.moveTo(50, 140);
-			ctx.lineTo(150, 60);
-			ctx.lineTo(250, 140);
-			ctx.closePath();
+			ctx.rect(x, y, width, height);
 			ctx.stroke();
 
-			ctx.font = '30px Arial';
-			ctx.fillText(shdl, 10, 50);
+			ctx.font = '14px Arial';
+			ctx.fillText(name, x + width / 2 - 15, y + height / 2 + 5);
+		}
+	}
+
+	function drawWire(x0: number, y0: number, x1: number, y1: number, name: string = '') {
+		if (ctx !== null) {
+			const width = x1 - x0;
+
+			//text
+			ctx.font = '14px Arial';
+			ctx.fillText(name, x0 + width/6 - 3, y0 - 3);
+
+			//lines
+			ctx.moveTo(x0, y0);
+			ctx.lineTo(x0 + width / 3, y0);
+			ctx.lineTo(x1 - width / 3, y1);
+			ctx.lineTo(x1, y1);
+			ctx.stroke();
 		}
 	}
 </script>
