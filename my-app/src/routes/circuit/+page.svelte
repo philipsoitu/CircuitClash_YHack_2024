@@ -9,6 +9,7 @@
 	let buttontext = ["Show Question","Show circuit"]
 	let buttontextindex = 0
 	let description = 'Define the functionality of a full 1-bit adder in shdl.'
+	export let data;
 	let title = 'Full 1-bit Adder'
 	let qnum = 1;
 	let inputData = ['I01', 'I02'];
@@ -37,8 +38,8 @@
 
 			<div class="flex h-full flex-col gap-4 overflow-y-auto p-4">
 					<div class="card">
-						<h1 class="h1">Q{qnum}: {title}</h1>
-						<p class="questiondesc">{description}</p>
+						<h1 class="h1">Q{data.messages[0].id}: {data.messages[0].name}</h1>
+						<p class="questiondesc">{data.messages[0].description}</p>
 						<TruthTable {inputData} {outputData} {truthTable} />				</div>
 
 			</div>
