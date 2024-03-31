@@ -93,9 +93,13 @@
 						theme={oneDark}
 						placeholder={'Start coding here..'}
 					/>
+					<div class="flex flex-col-2 mx-auto mt-4 gap-4">
 
-					<button class="btn" on:click={()=>{sendCode(value,parseInt(data.messages[0].id))}}>Submit</button>
-					<button class="btn mt-4" on:click={changeText}>{buttontext[buttontextindex]}</button>
+						<button class="btn  span-col-1" on:click={changeText}>{buttontext[buttontextindex]}</button>
+						<button class="btn span-col-1" on:click={()=>{sendCode(value,parseInt(data.messages[0].id))}}>Submit</button>
+
+					</div>
+
 		</div>
 	</div>
 </main>
