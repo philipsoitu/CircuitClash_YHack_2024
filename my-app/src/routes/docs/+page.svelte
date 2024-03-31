@@ -206,4 +206,64 @@
          </tr>
       </tbody>
    </table>
+   <br><br>
+   <h1 class="h1">SHDL (Simple Hardware Description Language) Documentation</h1>
+    <p>SHDL is designed for educational purposes to demystify the principles of digital logic and circuit design through programming. It enables users to define, simulate, and explore digital circuits programmatically.</p>
+    
+    <h2 class="h2">Language Structure</h2>
+    <p>An SHDL program comprises variable declarations, gate definitions, and gate instantiations to form a digital circuit. It supports basic logic operations such as AND, OR, NOT, and XOR.</p>
+
+    <h2 class="h2">Variables</h2>
+    <p>Variables in SHDL are categorized into Inputs, Outputs, and Wires.</p>
+
+    <h2 class="h2">Gates</h2>
+    <p>Gates are user-defined entities encapsulating specific logical functionalities. Gates cannot be nested or invoke themselves recursively.</p>
+
+    <h2 class="h2">Syntax Highlights</h2>
+    <h3 class="h3">Variable Declaration</h3>
+    <pre>
+   INPUT &lt;variable_name&gt;
+   OUTPUT &lt;variable_name&gt;
+   WIRE &lt;variable_name&gt;
+    </pre>
+
+    <h3 class="h3">Gate Definition and Constraints</h3>
+    <pre>
+STARTGATE &lt;gate_name&gt; INPUT &lt;input1&gt; [INPUT &lt;input2&gt; ...] OUTPUT &lt;output1&gt; [OUTPUT &lt;output2&gt; ...]
+    // Operations here
+ENDGATE
+    </pre>
+
+    <h3 class="h3">Operations</h3>
+    <pre>
+AND, OR, NOT, XOR
+    </pre>
+    <br>
+    <h2 class="h2">Example</h2>
+    <pre>
+INPUT A
+INPUT B
+OUTPUT S
+OUTPUT C
+WIRE T1
+WIRE T2
+
+STARTGATE MYXOR INPUT X INPUT Y OUTPUT Z
+    OR X Y T1
+    AND X Y T2
+    NOT T2 T3
+    AND T1 T3 Z
+ENDGATE
+
+STARTGATE ADDER INPUT X INPUT Y OUTPUT Z OUTPUT I    
+    MYXOR X Y Z
+    AND X Y I
+ENDGATE
+
+ADDER A B S C
+    </pre>
+    <br>
+    <h2 class="h2">Conclusion</h2>
+    <p>SHDL simplifies the exploration of digital logic and circuit design principles, serving as an invaluable tool for educational contexts.</p>
+
 </main>
