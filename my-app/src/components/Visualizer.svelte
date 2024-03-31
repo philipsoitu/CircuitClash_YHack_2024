@@ -18,11 +18,10 @@
 	let gates: string[];
 
 	//gate positioning
-	let layerInputs: string[][];
 
 	onMount(() => {
 		ctx = canvas.getContext('2d');
-
+		console.log(layerInitializer());
 		render();
 		layerInitializer();
 	});
@@ -70,6 +69,7 @@
 	}
 
 	function layerInitializer() {
+		let layerInputs: string[][];
 		// Parse SHDL and extract necessary information
 		let trimmedString = parseText(shdl);
 		inputs = parseInput(trimmedString);
@@ -79,23 +79,32 @@
 
 		// Initialize layers
 		layerInputs = [inputs];
+		let layers: string[][] = [];
+
+		let info;
+		let gateName;
+		let gateInputs: string[];
+		let gateOutputs: string[];
 
 		gates.forEach((gate) => {
-			let info = gate.split(' ');
-			let gateName = info[0];
-			let gateInputs: string[];
-			let gateOutputs: string[];
+			info = gate.split(' ');
+			gateName = info[0];
 
-			if (gateName === 'AND' || info[0] === 'OR' || info[0] === 'XOR') {
-				gateInputs = info.slice(1, 3);
-				gateOutputs = [info[3]];
-			} else if (gateName === 'NOT') {
-				gateInputs = [info[1]];
-				gateOutputs = [info[2]];
-			} else {
-				// Custom gate
-				// Handle custom gates as per your requirement
-				return;
+			switch (gateName) {
+				case 'AND':
+				case 'OR':
+				case 'XOR':
+					gateInputs = info.slice(1, 3);
+					gateOutputs = [info[3]];
+					break;
+				case 'NOT':
+					gateInputs = [info[1]];
+					gateOutputs = [info[2]];
+					break;
+				default:
+					// Custom gate
+					// Handle custom gates as per your requirement
+					return;
 			}
 
 			// Find the layer where all inputs are available
@@ -117,7 +126,44 @@
 				layerInputs.push([...gateInputs, ...gateOutputs]);
 			}
 		});
-		console.log(layerInputs)
+
+		gates.forEach((gate) => {
+			info = gate.split(' ');
+			gateName = info[0];
+
+			switch (gateName) {
+				case 'AND':
+				case 'OR':
+				case 'XOR':
+					gateInputs = info.slice(1, 3);
+					gateOutputs = [info[3]];
+					break;
+				case 'NOT':
+					gateInputs = [info[1]];
+					gateOutputs = [info[2]];
+					break;
+				default:
+					// Custom gate
+					// Handle custom gates as per your requirement
+					return;
+			}
+
+			let i = 0;
+			let remaining: string[] = gateInputs;
+			let gateAlreadyAdded = false; // Flag to check if gate is already added
+			layerInputs.forEach((layerInput) => {
+				remaining = remaining.filter((item) => !layerInput.includes(item));
+				if (remaining.length === 0 && !gateAlreadyAdded) {
+					if (!layers[i] || !layers[i].includes(gate)) {
+						// Check if the gate is not already added
+						layers[i] = [...(layers[i] || []), gate];
+						gateAlreadyAdded = true; // Set flag to true
+					}
+				}
+				i++;
+			});
+		});
+		return layers;
 	}
 
 	//parser functions
