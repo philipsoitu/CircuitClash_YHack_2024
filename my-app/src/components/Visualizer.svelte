@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import { LayoutBottombarCollapse } from 'tabler-icons-svelte';
+	import Layout from '../routes/+layout.svelte';
 
 	export let width: number = 500;
 	export let height: number = 500;
@@ -15,10 +17,14 @@
 	let wires: string[];
 	let gates: string[];
 
+	//gate positioning
+	let layerInputs: string[][];
+
 	onMount(() => {
 		ctx = canvas.getContext('2d');
 
 		render();
+		layerInitializer();
 	});
 
 	function render() {
@@ -39,7 +45,7 @@
 		drawInputs(inputs);
 		drawOutputs(outputs);
 
-		let i = 1;
+		let i: number;
 		gates.forEach((gate) => {
 			let gateInfo = gate.split(' ');
 			let gateName = gateInfo[0];
@@ -59,43 +65,59 @@
 				alert('FUUUUCCCCKCKKKassfjasijasifjasfasfhjf');
 			}
 
-			//inputs
-			let inputslength = inputs.length + 1;
-			let gateinputslength = gateInputs.length + 1;
-			gateInputs.forEach((input) => {
-				i = inputs.indexOf(input);
-				if (i !== -1) {
-					drawWire(
-						x,
-						y + (gate_height * (i + 1)) / gateinputslength,
-						10,
-						(height * (i + 1)) / inputslength
-					);
-				} else {
-					alert('FUUUUCCCCKCKKK');
-				}
-			});
-
-			//outputs
-			let outputlength = outputs.length + 1;
-			let gateoutputlength = gateOutputs?.length + 1;
-			i = 1;
-			gateOutputs.forEach((output) => {
-				i = outputs.indexOf(output);
-				if (i !== -1) {
-					drawWire(
-						x + gate_width,
-						y + (gate_height * (i + 1)) / gateoutputlength,
-						width - 10,
-						(height * (i + 1)) / outputlength
-					);
-				} else {
-					alert('FUUUUCCCCKCKKK');
-				}
-			});
-
 			y = y + 100;
 		});
+	}
+
+	function layerInitializer() {
+		// Parse SHDL and extract necessary information
+		let trimmedString = parseText(shdl);
+		inputs = parseInput(trimmedString);
+		outputs = parseOutput(trimmedString);
+		wires = parseWire(trimmedString);
+		gates = parseGates(shdl);
+
+		// Initialize layers
+		layerInputs = [inputs];
+
+		gates.forEach((gate) => {
+			let info = gate.split(' ');
+			let gateName = info[0];
+			let gateInputs: string[];
+			let gateOutputs: string[];
+
+			if (gateName === 'AND' || info[0] === 'OR' || info[0] === 'XOR') {
+				gateInputs = info.slice(1, 3);
+				gateOutputs = [info[3]];
+			} else if (gateName === 'NOT') {
+				gateInputs = [info[1]];
+				gateOutputs = [info[2]];
+			} else {
+				// Custom gate
+				// Handle custom gates as per your requirement
+				return;
+			}
+
+			// Find the layer where all inputs are available
+			let targetLayer = -1;
+			for (let i = 0; i < layerInputs.length; i++) {
+				if (isSubset(gateInputs, layerInputs[i])) {
+					targetLayer = i;
+					break;
+				}
+			}
+
+			if (targetLayer !== -1) {
+				if (layerInputs.length <= targetLayer + 1) {
+					layerInputs.push([]);
+				}
+				layerInputs[targetLayer + 1].push(...gateOutputs);
+			} else {
+				// Inputs not found in any layer, place gate in a new layer
+				layerInputs.push([...gateInputs, ...gateOutputs]);
+			}
+		});
+		console.log(layerInputs)
 	}
 
 	//parser functions
@@ -159,7 +181,7 @@
 
 		// Filter out lines starting with INPUT or OUTPUT
 		const otherLines = lines.filter(
-			(line) => !line.startsWith('INPUT') && !line.startsWith('OUTPUT')
+			(line) => !line.startsWith('INPUT') && !line.startsWith('OUTPUT') && !line.startsWith('WIRE')
 		);
 
 		// Combining other lines and gates
@@ -284,6 +306,10 @@
 				i++;
 			});
 		}
+	}
+
+	function isSubset(subset: any[], superset: any[]) {
+		return subset.every((element) => superset.includes(element));
 	}
 </script>
 
