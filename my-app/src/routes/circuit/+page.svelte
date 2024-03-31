@@ -91,7 +91,7 @@
 
 	async function updateLevel(level: number) {
 		try {
-			let response = await fetch('/api/level', {
+			let response = await fetch('/api/message', {
 				method: 'POST',
 				body: JSON.stringify(level.toString()) // Modify this string as needed
 			});
