@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { LayoutBottombarCollapse } from 'tabler-icons-svelte';
-	import Layout from '../routes/+layout.svelte';
+	import Layout from '../../routes/+layout.svelte';
 
 	export let width: number = 500;
 	export let height: number = 500;
@@ -18,6 +18,8 @@
 	let gates: string[];
 
 	//gate positioning
+	let layerInputs: string[][];
+	let layers: string[][];
 
 	onMount(() => {
 		ctx = canvas.getContext('2d');
@@ -31,7 +33,7 @@
 		wires = parseWire(trimmedString);
 		gates = parseGates(shdl);
 
-		let layers: string[][] = layerInitializer();
+		layerInitializer();
 
 		let x: number;
 		let y: number;
@@ -63,17 +65,31 @@
 					gateOutputs = [];
 					//custom gate
 				}
-				
-				
+
+				for (let input = 0; input < gateInputs.length; input++) {
+					let layer_index: number;
+					for (layer_index = 0; layer_index < layerInputs.length; layer_index++) {
+						if (layerInputs[layer_index].includes(gateInputs[input])) {
+							break;
+						}
+					}
+
+					let targetX: number = 10 + (480 * layer_index) / layerInputs[layer_index].length;
+					let targetY: number =
+						(height * (layerInputs[layer_index].indexOf(gateInputs[input]) + 1)) /
+						(layerInputs[layer_index].length + 1);
+					drawWire(x, y + (gate_height * (input + 1)) / (gateInputs.length + 1), targetX, targetY);
+				}
 			}
 		}
+
+		
 
 		drawInputs(inputs);
 		drawOutputs(outputs);
 	}
 
 	function layerInitializer() {
-		let layerInputs: string[][];
 		// Parse SHDL and extract necessary information
 		let trimmedString = parseText(shdl);
 		inputs = parseInput(trimmedString);
@@ -83,7 +99,7 @@
 
 		// Initialize layers
 		layerInputs = [inputs];
-		let layers: string[][] = [];
+		layers = [];
 
 		let info;
 		let gateName;
@@ -167,7 +183,6 @@
 				i++;
 			});
 		});
-		return layers;
 	}
 
 	//parser functions
