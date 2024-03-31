@@ -1,0 +1,16 @@
+{
+  "id": "mig_co4b98hue7a71jh4eorg",
+  "parentID": "mig_co4b91mpe2mbada2u970",
+  "checksum": "1:0098b97af33a81cd3b36d4e464a397a445ffda5d7bb4299cdd8dbc34a25f1cf9",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "expectedoutput",
+          "type": "string"
+        },
+        "table": "questions"
+      }
+    }
+  ]
+}

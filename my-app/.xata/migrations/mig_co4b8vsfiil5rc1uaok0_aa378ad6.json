@@ -1,0 +1,13 @@
+{
+  "id": "mig_co4b8vsfiil5rc1uaok0",
+  "parentID": "mig_co4b8tupe2mbada2u960",
+  "checksum": "1:aa378ad6d724c58c5ac9bac2bf5705a3e2eab0591bb4cbce2e7d5ffda3c8b210",
+  "operations": [
+    {
+      "renameTable": {
+        "newName": "questions",
+        "oldName": "levels"
+      }
+    }
+  ]
+}
