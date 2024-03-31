@@ -24,7 +24,13 @@
 		render();
 	});
 
+	$: if (shdl && ctx) {
+		render();
+		console.log('rerender');
+	}
+
 	function render() {
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
 		let trimmedString = parseText(shdl);
 		inputs = parseInput(trimmedString);
 		outputs = parseOutput(trimmedString);
@@ -40,8 +46,7 @@
 		let fontSize = 12;
 
 		for (let i = 0; i < layers.length; i++) {
-			let layer = layers[i];
-
+			let layer = layers[i] || [];
 			for (let j = 0; j < layer.length; j++) {
 				x = (width * (i + 1)) / (layers.length + 1);
 				y = (height * (j + 1)) / (layer.length + 1);
@@ -62,6 +67,7 @@
 					gateInputs = [];
 					gateOutputs = [];
 					//custom gate
+					drawGate(gateName, x, y, gate_width, gate_height, fontSize, gateInputs, gateOutputs);
 				}
 
 				for (let input = 0; input < gateInputs.length; input++) {
@@ -74,7 +80,7 @@
 
 					let initX: number = x;
 					let initY: number = y + (gate_height * (input + 1)) / (gateInputs.length + 1);
-					let targetX: number = initX - width/(layers.length+1) + gate_width;
+					let targetX: number = initX - width / (layers.length + 1) + gate_width;
 					let targetY: number =
 						(height * (layerInputs[layer_index].indexOf(gateInputs[input]) + 1)) /
 							(layerInputs[layer_index].length + 1) +
@@ -82,9 +88,27 @@
 					drawWire(initX, initY, targetX, targetY);
 				}
 
-				// for (let output = 0; output < gateInputs.length; output++) {}
+				for (let output = 0; output < gateOutputs.length; output++) {
+					if (outputs.includes(gateOutputs[output])) {
+						let initX: number = x + gate_width;
+						let initY: number = y + (gate_height * (output + 1)) / (gateOutputs.length + 1);
+						let targetX: number = width - 10;
+						let targetY: number =
+							(height * (outputs.indexOf(gateOutputs[output]) + 1)) / (outputs.length + 1);
+						drawWire(initX, initY, targetX, targetY);
+					}
+				}
 			}
 		}
+		//extension fix
+		inputs.forEach((input) => {
+			drawWire(
+				10,
+				(height * (inputs.indexOf(input) + 1)) / (inputs.length + 1),
+				gate_width,
+				(height * (inputs.indexOf(input) + 1)) / (inputs.length + 1)
+			);
+		});
 
 		drawInputs(inputs);
 		drawOutputs(outputs);
@@ -123,9 +147,8 @@
 					gateOutputs = [info[2]];
 					break;
 				default:
-					// Custom gate
-					// Handle custom gates as per your requirement
-					return;
+					gateInputs = [];
+					gateOutputs = [];
 			}
 
 			// Find the layer where all inputs are available
@@ -151,6 +174,7 @@
 		gates.forEach((gate) => {
 			info = gate.split(' ');
 			gateName = info[0];
+			console.log(gateName);
 
 			switch (gateName) {
 				case 'AND':
@@ -166,7 +190,8 @@
 				default:
 					// Custom gate
 					// Handle custom gates as per your requirement
-					return;
+					let outputCount = (shdl.match(/OUTPUT/gi) || []).length;
+					let inputCount = (shdl.match(/INPUT/gi) || []).length;
 			}
 
 			let i = 0;
@@ -256,7 +281,7 @@
 		return result;
 	}
 
-	function parseText(inputString: string) {
+	function parseText(inputString: string, currentView: string = 'main') {
 		// Regular expression to match STARTGATE and ENDGATE blocks along with their contents
 		const gateRegex = /STARTGATE.*?ENDGATE/gms;
 
@@ -383,7 +408,7 @@
 
 <style>
 	canvas {
-		background-color: transparent; /* Set the canvas background color to transparent */
-		border: 1px solid black; /* Optional: Add a border for better visualization */
+		background-color: transparent;
+		border: 1px solid black;
 	}
 </style>

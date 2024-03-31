@@ -1,51 +1,28 @@
 <script>
 	import Visualizer from '../../components/Visualizer/Visualizer.svelte';
-	let text1 = `INPUT A
+	let text = `INPUT A
 INPUT B
-OUTPUT Z
-AND A B Z`;
-
-    let text2 = `INPUT A
-INPUT B
-INPUT C
-
-OUTPUT Z
-WIRE T1
-WIRE T2
-
-AND A B T1
-NOT C T2
-OR T1 T2 Z`;
-
-	let text3 = `INPUT A
-INPUT B
-OUTPUT S
 OUTPUT C
-WIRE T1
-WIRE T2
-
-STARTGATE MYXOR INPUT X INPUT Y OUTPUT Z
-
-    WIRE T1
-    WIRE T2
-
-    OR X Y T1
-    AND X Y T2
-    NOT T2 T2
-    AND T1 T2 Z
-
-ENDGATE
-
-STARTGATE ADDER INPUT X INPUT Y OUTPUT Z OUTPUT I
-    
-    MYXOR X Y Z
-    AND X Y I
-
-ENDGATE
-
-ADDER A B S C`;
+AND A B C`;
 </script>
 
-<div class="mx-5 my-5">
-	<Visualizer width={500} height={500} shdl={text2} />
+<div style="width: 100%; display: table;">
+	<div style="display: table-row">
+		<div style="width: 600px; display: table-cell;">
+			<textarea 
+                bind:value={text}
+				on:input={() => {
+					text = text;
+				}}
+			/>
+		</div>
+		<div style="display: table-cell;"><Visualizer width={500} height={350} shdl={text} /></div>
+	</div>
 </div>
+
+<style>
+	textarea {
+		width: 100%;
+		height: 200px;
+	}
+</style>
