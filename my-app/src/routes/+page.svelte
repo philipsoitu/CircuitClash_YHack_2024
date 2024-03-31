@@ -25,6 +25,5 @@
     <SignIn>
       <div slot="submitButton" class="buttonPrimary">Sign in</div>
     </SignIn>
-    <SignIn provider="github"/>
   {/if}
 </div>
