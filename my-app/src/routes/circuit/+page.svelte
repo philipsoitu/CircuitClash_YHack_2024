@@ -117,7 +117,7 @@
 </script>
 
 <main class="container flex flex-1 flex-col">
-	{#if data.messages[0].type === "2"}
+	{#if data.messages[0].type === "1"}
 	
 	<div class="grid flex-1 gap-2 lg:grid-cols-2">
 		{#if buttontextindex === 1}
