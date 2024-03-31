@@ -1,0 +1,16 @@
+{
+  "id": "mig_co4g1ksfiil5rc1uaq7g",
+  "parentID": "mig_co4g1j1ue7a71jh4eq7g",
+  "checksum": "1:36dc5e5fc5f574c535d3c1c22e6ed594adc354119714d5f597b7cca68cd86da5",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "user2points",
+          "type": "int"
+        },
+        "table": "currentmatches"
+      }
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "id": "mig_co4g111ue7a71jh4eq6g",
+  "parentID": "mig_co4fvk9ue7a71jh4eq50",
+  "checksum": "1:5e05fd85e21483936013348f705e03fef873428e73f10c26ae0da05139b1ff6b",
+  "operations": [
+    {
+      "addTable": {
+        "table": "currentmatches"
+      }
+    }
+  ]
+}

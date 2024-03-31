@@ -1,0 +1,16 @@
+{
+  "id": "mig_co4fugpue7a71jh4eq40",
+  "parentID": "mig_co4fu9kfiil5rc1uaq4g",
+  "checksum": "1:4aa749241e0f719fbc7bf5da48b6fc3a85912fcb9bf45d143d6c8ad1aac4eff1",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "levelnumber",
+          "type": "int"
+        },
+        "table": "users"
+      }
+    }
+  ]
+}
