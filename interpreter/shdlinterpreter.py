@@ -1,5 +1,8 @@
 from itertools import product
 from tabulate import tabulate
+import os
+import ast
+
 def runfunction(gatecode,variables,gateparams,line,gatestack,setvars,gateparamstypes):
 
     gateunset = set()
@@ -255,6 +258,8 @@ def shdltruthtable(shdl_code):
         elif parts[0] in ["OUTPUT"]:
             outputvars.append(parts[1])
         # Generate all possible input combinations
+    iohash = {"input": inputvars, "output": outputvars}
+    print(iohash)
     num_inputs = len(inputvars)
     input_combinations = list(product([0, 1], repeat=num_inputs))
     truth_table = [dict(zip(inputvars, combination)) for combination in input_combinations]
@@ -267,6 +272,19 @@ def shdltruthtable(shdl_code):
 
     return truth_table
 
+def are_lists_equal(list1, list2):
+    # Check if the lengths of the lists are equal
+    if len(list1) != len(list2):
+        return False
+
+    # Iterate over each dictionary in the lists
+    for dict1, dict2 in zip(list1, list2):
+        # Check if the dictionaries have the same key-value pairs
+        if dict1 != dict2:
+            return False
+    
+    # If all dictionaries are equal, return True
+    return True
 
             
 
@@ -277,7 +295,5 @@ with open("testcode.shdl", "r") as file:
 
 a = shdltruthtable(shdl_code)
 
-
-print(a)
 
 

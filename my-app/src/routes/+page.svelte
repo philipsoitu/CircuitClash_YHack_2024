@@ -2,6 +2,7 @@
 	// @ts-ignore
 	import { SignIn, SignOut } from '@auth/sveltekit/components';
 	import { page } from '$app/stores';
+	import { goto } from '$app/navigation';
 	export let data;
 	
 </script>
@@ -14,7 +15,7 @@
 				<div class="card flex flex-col items-center justify-items-center gap-4">
 					<h1 class="h1 -mb-1">Question {questions.id}</h1>
 					<h2 class="">{questions.name}</h2>
-					<button class="btn">Try it out</button>
+					<a class="btn btn-sm" href="/circuit"> Try now </a>
 				</div>
 
 			{/each}

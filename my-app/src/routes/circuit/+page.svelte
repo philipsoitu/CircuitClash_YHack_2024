@@ -5,9 +5,7 @@
 	import SuperDebug, { superForm } from 'sveltekit-superforms';
 	import { onMount } from 'svelte';
 	import TruthTable from './tablegenerate.svelte';
-	import { Field } from 'formsnap';
-	import { zodClient } from 'sveltekit-superforms/adapters';
-	import { schema } from './schema';
+
 	let buttontext = ['Show Question', 'Show circuit'];
 	let buttontextindex = 1;
 	let description = 'Define the functionality of a full 1-bit adder in shdl.';
@@ -29,10 +27,6 @@
 	console.log(tb);
 	let value = '';
 
-	const superform = superForm(data.form, {
-		dataType: 'json'
-	});
-	const { form: formData, enhance, submitting } = superform;
 
 	
 </script>
@@ -57,7 +51,6 @@
 		{/if}
 
 		<div class="col-span-1 my-4 hidden rounded-xl bg-primary p-4 lg:grid overflow-y-auto">
-<<<<<<< HEAD
 			
 					<CodeMirror
 						bind:value
@@ -72,23 +65,6 @@
 						placeholder={'Start coding here..'}
 					/>
 				
-=======
-			<CodeMirror
-				bind:value
-				styles={{
-					'&': {
-						width: '100%',
-						maxWidth: '100%',
-						height: '33em'
-						
-					}
-				}}
-				theme={oneDark}
-				placeholder={'Start coding here..'}
-			/>
-			<button class="btn mt-4" on:click={changeText}>{buttontext[buttontextindex]}</button>
-
->>>>>>> 34a22a060f9bb05b3be49f82c70f2b11e227c220
 		</div>
 	</div>
 </main>
