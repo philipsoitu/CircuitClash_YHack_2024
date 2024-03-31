@@ -37,6 +37,7 @@
 	let value = '';
 	async function sendCode(code: string) {
 		try {
+			console.log(typeof code);
 			let response = await fetch('/api/code', {
 				method: 'POST',
 				headers: {
@@ -46,10 +47,9 @@
 			});
 
 			if (response.ok) {
-				const responseData = await response;
-				console.log(responseData.body.getReader());
-
-				if (responseData['answer'] == true) {
+				const responseData = await response.json();
+				console.log(response);
+				if (responseData['answer'] == 'true') {
 					let lvl: number = parseInt(data.messages[0].id);
 					lvl++;
 					updateLevel(lvl);
@@ -91,7 +91,7 @@
 
 	async function updateLevel(level: number) {
 		try {
-			let response = await fetch('/api/level', {
+			let response = await fetch('/api/message', {
 				method: 'POST',
 				body: JSON.stringify(level.toString()) // Modify this string as needed
 			});
