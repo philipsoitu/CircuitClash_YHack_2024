@@ -62,6 +62,7 @@
 					gateInputs = [];
 					gateOutputs = [];
 					//custom gate
+					drawGate(gateName, x, y, gate_width, gate_height, fontSize, gateInputs, gateOutputs);
 				}
 
 				for (let input = 0; input < gateInputs.length; input++) {
@@ -84,11 +85,11 @@
 
 				for (let output = 0; output < gateOutputs.length; output++) {
 					if (outputs.includes(gateOutputs[output])) {
-						console.log(gateName, i, j);
 						let initX: number = x + gate_width;
 						let initY: number = y + (gate_height * (output + 1)) / (gateOutputs.length + 1);
 						let targetX: number = width - 10;
-						let targetY: number = height * (outputs.indexOf(gateOutputs[output]) + 1)/ (outputs.length + 1);
+						let targetY: number =
+							(height * (outputs.indexOf(gateOutputs[output]) + 1)) / (outputs.length + 1);
 						drawWire(initX, initY, targetX, targetY);
 					}
 				}
@@ -265,7 +266,7 @@
 		return result;
 	}
 
-	function parseText(inputString: string) {
+	function parseText(inputString: string, currentView:string = "main") {
 		// Regular expression to match STARTGATE and ENDGATE blocks along with their contents
 		const gateRegex = /STARTGATE.*?ENDGATE/gms;
 

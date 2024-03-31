@@ -49,5 +49,5 @@ ADDER A B S C`;
 </script>
 
 <div class="mx-5 my-5">
-	<Visualizer width={500} height={500} shdl={text2} />
+	<Visualizer width={500} height={500} shdl={text3} />
 </div>
