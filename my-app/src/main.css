@@ -91,8 +91,14 @@
     margin: 0;
 }
 
+.sign-in-box {
+    max-width: 700px; 
+    margin: 30px auto;
+    border-radius: 15px;
+}
+
 main, .main {
-    max-width: 1100px; 
+    max-width: 1150px; 
     margin: 30px auto;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     background-color: var(--main-color); 
@@ -118,6 +124,10 @@ main, .main {
     margin-bottom: 6px;
 }
 
+.side-by-side-btn {
+    max-width: 100%;
+}
+
 p {
     font-size: 1.1em;
     line-height: 1.6;
@@ -129,6 +139,8 @@ table {
     width: 100%; 
     margin-bottom: 20px;
 }
+
+
 
 th, td {
     border: 1px solid var(--color);

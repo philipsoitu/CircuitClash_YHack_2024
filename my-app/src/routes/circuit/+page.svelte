@@ -115,7 +115,7 @@
 	let text = `Write your answer here..`;
 </script>
 
-<main class="container flex flex-1 flex-col">
+<main class="flex justify-between rounded-2xl border-2 main px-4 py-2">
 	{#if data.messages[0].type == '1'}
 		<div class="grid flex-1 gap-2 lg:grid-cols-2">
 			{#if buttontextindex === 1}
