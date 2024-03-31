@@ -15,7 +15,7 @@ WIRE T2
 
 AND A B T1
 NOT C T2
-OR B C Z`;
+OR T1 T2 Z`;
 
 	let text3 = `INPUT A
 INPUT B
