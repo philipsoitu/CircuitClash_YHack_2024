@@ -6,7 +6,6 @@
 	
 </script>
 
-<h1>SvelteKit Auth Example</h1>
 <main class="container flex flex-1 flex-col overflow-hidden ">
 	{#if data.user}
 
@@ -23,7 +22,7 @@
 
 		</div>
 	{:else}
-	<div class="mx-auto my-auto card">
+	<div class="mx-auto my-auto card items-center">
 		<h1 class="h1">You are not signed in</h1>
 		<SignIn>
 			<div slot="submitButton" class="btn">Sign in</div>
