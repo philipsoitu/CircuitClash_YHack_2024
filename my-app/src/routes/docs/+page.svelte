@@ -1,7 +1,4 @@
-<script>
-    // No extra imports needed for basic text and tables
-</script>
-<main>
+<main class="border-2 rounded-2xl">
    <h1 class="h1">What is Circuit Clash?</h1>
    <p>
       Circuit Clash is an online platform meant for young students and enthusiasts interested in learning about boolean logic and logic circuits. It allows you to write code in our custom language, SHDL, which is a simplified VHDL, perfect for the use of curious young enthusiasts. With Circuit Clash, you will write code, and we will draw the circuit for you in real time, allowing you to see the logic gates at work.
@@ -18,6 +15,7 @@
    </p>
    <br>
    <h1 class="h1">Logic Gates</h1>
+   <br>
    <h2 class="h2">NOT Gate</h2>
    <p>The NOT gate (also called an inverter) has only one input. It outputs the opposite state of its input.</p>
    <table>
