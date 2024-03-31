@@ -1,7 +1,7 @@
-<script>
-    export let inputData = [];
-    export let outputData = [];
-    export let truthTable = [];
+<script lang="ts">
+    export let inputData:string[] = [];
+    export let outputData:string[] = [];
+    export let truthTable:string[] = [];
   </script>
   
   <style>

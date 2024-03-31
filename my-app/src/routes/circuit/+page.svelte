@@ -41,7 +41,7 @@
 					<div class="card">
 						<h1 class="h1">Q{data.messages[0].id}: {data.messages[0].name}</h1>
 						<p class="questiondesc">{data.messages[0].description}</p>
-						<TruthTable {tb} {inputData} {outputData}/>
+						<TruthTable truthTable={tb} {inputData} {outputData}/>
 					</div>
 
 			</div>
