@@ -1,5 +1,4 @@
 from itertools import product
-from tabulate import tabulate
 from xata.client import XataClient
 from dotenv import load_dotenv
 import os
@@ -276,7 +275,6 @@ def shdltruthtable(shdl_code):
         truth_table[idx]= {**truth_table[idx],**result}
     combinedlist = inputvars + outputvars
     table_data = [[row[var] for var in combinedlist] for row in truth_table]
-    print(tabulate(table_data, headers=combinedlist, tablefmt='pretty'))
 
     return truth_table
 

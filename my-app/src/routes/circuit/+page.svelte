@@ -24,7 +24,18 @@
 	console.log(outputData)
 	console.log(tb)
 	let value = '';
-
+	async function doPost () {
+		const res = await fetch('https://httpbin.org/post', {
+			method: 'POST',
+			body: JSON.stringify({
+				foo,
+				bar
+			})
+		})
+		
+		const json = await res.json()
+		result = JSON.stringify(json)
+	}
 	function changeText() {
 		buttontextindex = buttontextindex === 0 ? 1 : 0;
 	}
