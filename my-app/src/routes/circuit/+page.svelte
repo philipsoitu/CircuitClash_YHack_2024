@@ -21,12 +21,15 @@
 	let tb = JSON.parse((data.messages[0].expectedoutput).replace(/'/g, '"')); // Ensure this is correctly structured for parsing
 
 	console.log(tb);
+	console.log(inputData);
+	console.log(outputData);
+
 	let value = '';
 
 	function changeText() {
 		buttontextindex = buttontextindex === 0 ? 1 : 0;
 	}
-	
+
 </script>
 
 
