@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHDL Documentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 15px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>SHDL (Simple Hardware Description Language) Documentation</h1>
+    <p>SHDL is a language designed for educational purposes, focusing on demystifying digital logic and circuit design principles through programming.</p>
+    
+    <h2>Language Structure</h2>
+    <p>An SHDL program consists of the following components:</p>
+    <ul>
+        <li><strong>Variable Declarations:</strong> Declare the inputs, outputs, and internal wires used in the circuit.</li>
+        <li><strong>Gate Definitions:</strong> Define custom gates that encapsulate specific logical functionalities.</li>
+        <li><strong>Gate Instantiations:</strong> Instantiate gates and define connections between them to form a digital circuit.</li>
+    </ul>
+
+    <h2>Variables</h2>
+    <p>Variables in SHDL play essential roles in defining the circuit's behavior:</p>
+    <ul>
+        <li><strong>Inputs:</strong> Represent external signals entering the circuit.</li>
+        <li><strong>Outputs:</strong> Represent signals leaving the circuit.</li>
+        <li><strong>Wires:</strong> Internal connections facilitating communication between gates.</li>
+    </ul>
+    <pre>
+        INPUT A
+        OUTPUT B
+        WIRE C
+    </pre>
+
+    <h2>Gates</h2>
+    <p>Gates are fundamental building blocks in SHDL, encapsulating specific logical operations:</p>
+    <ul>
+        <li><strong>Gate Definition:</strong> Custom gates are defined using the <code>STARTGATE</code> and <code>ENDGATE</code> keywords, specifying their inputs and outputs.</li>
+        <li><strong>Constraints:</strong> Gates cannot be nested within each other or invoke themselves recursively to prevent infinite loops.</li>
+    </ul>
+    <pre>
+        STARTGATE GATE1 INPUT A OUTPUT B
+            // Gate definition here
+        ENDGATE
+    </pre>
+
+    <h2>Syntax Highlights</h2>
+    <p>Key syntax elements in SHDL include:</p>
+    <ul>
+        <li><strong>Variable Declaration:</strong> Declare variables using <code>INPUT</code>, <code>OUTPUT</code>, or <code>WIRE</code> keywords.</li>
+        <li><strong>Gate Definition:</strong> Define gates using the <code>STARTGATE</code> and <code>ENDGATE</code> keywords.</li>
+        <li><strong>Operations:</strong> Perform logical operations such as <code>AND</code>, <code>OR</code>, <code>NOT</code>, and <code>XOR</code>.</li>
+    </ul>
+    <pre>
+        INPUT &lt;variable_name&gt;
+        OUTPUT &lt;variable_name&gt;
+        WIRE &lt;variable_name&gt;
+
+        STARTGATE &lt;gate_name&gt; INPUT &lt;input1&gt; [INPUT &lt;input2&gt; ...] OUTPUT &lt;output1&gt; [OUTPUT &lt;output2&gt; ...]
+            // Operations here
+        ENDGATE
+
+        AND, OR, NOT, XOR
+    </pre>
+
+    <h2>Example</h2>
+    <p>Below is an example SHDL code illustrating the creation of a digital circuit:</p>
+    <pre>
+        INPUT A
+        INPUT B
+        OUTPUT S
+        OUTPUT C
+        WIRE T1
+        WIRE T2
+
+        STARTGATE MYXOR INPUT X INPUT Y OUTPUT Z
+            OR X Y T1
+            AND X Y T2
+            NOT T2 T3
+            AND T1 T3 Z
+        ENDGATE
+
+        STARTGATE ADDER INPUT X INPUT Y OUTPUT Z OUTPUT I    
+            MYXOR X Y Z
+            AND X Y I
+        ENDGATE
+
+        ADDER A B S C
+    </pre>
+
+    <h2>Conclusion</h2>
+    <p>SHDL simplifies the exploration of digital logic and circuit design principles, making it an invaluable tool for educational contexts.</p>
+</body>
+</html>

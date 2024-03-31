@@ -1,5 +1,14 @@
 from itertools import product
 from tabulate import tabulate
+from xata.client import XataClient
+from dotenv import load_dotenv
+import os
+import ast
+
+load_dotenv(".env")
+db_url_env = os.environ.get("XATA_URL")
+api_key_env = os.environ.get("XATA_API_KEY")
+xata = XataClient(db_url=db_url_env,api_key=api_key_env)
 def runfunction(gatecode,variables,gateparams,line,gatestack,setvars,gateparamstypes):
 
     gateunset = set()
@@ -267,6 +276,19 @@ def shdltruthtable(shdl_code):
 
     return truth_table
 
+def are_lists_equal(list1, list2):
+    # Check if the lengths of the lists are equal
+    if len(list1) != len(list2):
+        return False
+
+    # Iterate over each dictionary in the lists
+    for dict1, dict2 in zip(list1, list2):
+        # Check if the dictionaries have the same key-value pairs
+        if dict1 != dict2:
+            return False
+    
+    # If all dictionaries are equal, return True
+    return True
 
             
 
@@ -278,6 +300,18 @@ with open("testcode.shdl", "r") as file:
 a = shdltruthtable(shdl_code)
 
 
-print(a)
+apiinput = {"code": shdl_code,
+            "number": 1}
+
+try:
+    resp = xata.records().get("questions", apiinput["number"])
+    assert resp.is_success()
+except:
+    print("Error retrieving or processing hex")
+print(resp)
+correctanswer = ast.literal_eval(resp["expectedoutput"])
+print(are_lists_equal(a,correctanswer))
+
+
 
 
