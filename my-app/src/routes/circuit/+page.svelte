@@ -1,33 +1,30 @@
 <script lang="ts">
-
 	import CodeMirror from 'svelte-codemirror-editor';
 	import { oneDark } from '@codemirror/theme-one-dark';
 	import Visualizer from '../../components/Visualizer.svelte';
 	import SuperDebug from 'sveltekit-superforms';
 	import { onMount } from 'svelte';
-	import TruthTable from './tablegenerate.svelte'
-	let buttontext = ["Show Question","Show circuit"]
-	let buttontextindex = 0
-	let description = 'Define the functionality of a full 1-bit adder in shdl.'
+	import TruthTable from './tablegenerate.svelte';
+	let buttontext = ["Show Question", "Show circuit"];
+	let buttontextindex = 1;
+	let description = 'Define the functionality of a full 1-bit adder in shdl.';
 	export let data;
-	let title = 'Full 1-bit Adder'
+	let title = 'Full 1-bit Adder';
 	let qnum = 1;
-	let inputData = ['I01', 'I02'];
-	let outputData = ['O01', 'O02'];
-	let truthTable = [
-		{'I01': 0, 'I02': 0, 'O01': 0, 'O02': 0},
-		{'I01': 0, 'I02': 1, 'O01': 1, 'O02': 0},
-		{'I01': 1, 'I02': 0, 'O01': 1, 'O02': 0},
-		{'I01': 1, 'I02': 1, 'O01': 0, 'O02': 1}
-	];
+	
+	
+	// Assuming data.messages[0].io contains structured data you might need to separate or process further
+	console.log(data.messages[0].io);
+	let ioData = JSON.parse((data.messages[0].io).replace(/'/g, '"')); // Ensure this is correctly structured for parsing
+	let inputData = ioData.input; // Hypothetical structure
+	let outputData = ioData.output; // Hypothetical structure
+	let tb = JSON.parse((data.messages[0].expectedoutput).replace(/'/g, '"')); // Ensure this is correctly structured for parsing
+
+	console.log(tb);
 	let value = '';
+
 	function changeText() {
-		if (buttontextindex === 0){
-			buttontextindex = 1
-		}
-		else{
-			buttontextindex = 0
-		}
+		buttontextindex = buttontextindex === 0 ? 1 : 0;
 	}
 </script>
 
@@ -40,7 +37,8 @@
 					<div class="card">
 						<h1 class="h1">Q{data.messages[0].id}: {data.messages[0].name}</h1>
 						<p class="questiondesc">{data.messages[0].description}</p>
-						<TruthTable {inputData} {outputData} {truthTable} />				</div>
+						<TruthTable {tb} {inputData} {outputData}/>
+					</div>
 
 			</div>
 		{:else}
