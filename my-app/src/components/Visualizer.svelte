@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { le } from '@xata.io/client';
 	import { onMount } from 'svelte';
 
 	export let width: number = 500;
@@ -32,7 +31,7 @@
 
 		//positional
 		let x = 200;
-		let y = 200;
+		let y = 100;
 		let gate_width = 60;
 		let gate_height = 40;
 		let fontSize = 12;
@@ -57,30 +56,38 @@
 				drawGate(gateName, x, y, gate_width, gate_height, fontSize, gateInputs, gateOutputs);
 			} else {
 				//custom gate fuck fuck fuck
+				alert('FUUUUCCCCKCKKKassfjasijasifjasfasfhjf');
 			}
 
 			//inputs
-			let length = inputs.length + 1;
+			let inputslength = inputs.length + 1;
+			let gateinputslength = gateInputs.length + 1;
 			gateInputs.forEach((input) => {
 				i = inputs.indexOf(input);
 				if (i !== -1) {
-					drawWire(x, y + (gate_height * (i + 1)) / length, 10, (height * (i + 1)) / length);
+					drawWire(
+						x,
+						y + (gate_height * (i + 1)) / gateinputslength,
+						10,
+						(height * (i + 1)) / inputslength
+					);
 				} else {
 					alert('FUUUUCCCCKCKKK');
 				}
 			});
 
 			//outputs
-			length = outputs.length + 1;
+			let outputlength = outputs.length + 1;
+			let gateoutputlength = gateOutputs?.length + 1;
 			i = 1;
 			gateOutputs.forEach((output) => {
 				i = outputs.indexOf(output);
 				if (i !== -1) {
 					drawWire(
 						x + gate_width,
-						y + (gate_height * (i + 1)) / length,
+						y + (gate_height * (i + 1)) / gateoutputlength,
 						width - 10,
-						(height * (i + 1)) / length
+						(height * (i + 1)) / outputlength
 					);
 				} else {
 					alert('FUUUUCCCCKCKKK');
