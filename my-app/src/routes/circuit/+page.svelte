@@ -26,6 +26,7 @@
 	function changeText() {
 		buttontextindex = buttontextindex === 0 ? 1 : 0;
 	}
+	
 </script>
 
 
@@ -47,7 +48,6 @@
 				<h1 class="h1">Circuit:</h1>
 				<Visualizer width={500} height = {500} shdl= {value}/>
 			</div>
-
 	</div>
 
 		{/if}
