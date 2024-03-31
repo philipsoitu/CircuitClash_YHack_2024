@@ -91,14 +91,14 @@
 
 	async function updateLevel(level: number) {
 		try {
-			let response = await fetch('/api/message', {
+			let response = await fetch('/api/level', {
 				method: 'POST',
 				body: JSON.stringify(level.toString()) // Modify this string as needed
 			});
 
 			if (response.ok) {
 				const responseData = await response.json();
-				console.log(response);
+				console.log(responseData);
 			} else {
 				console.error('Failed to process string');
 			}
