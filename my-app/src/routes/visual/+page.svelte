@@ -2,15 +2,22 @@
 	import Visualizer from '../../components/Visualizer.svelte';
 	let text1 = `INPUT A
 INPUT B
-INPUT C
-OUTPUT Y
 OUTPUT Z
+AND A B Z`;
 
-OR A B Y
-AND C A Z`;
+    let text2 = `INPUT A
+INPUT B
+INPUT C
 
+OUTPUT Z
+OUTPUT T1
+OUTPUT T2
 
-	let text2 = `INPUT A
+AND A B T1
+NOT C T2
+OR B C Z`;
+
+	let text3 = `INPUT A
 INPUT B
 OUTPUT S
 OUTPUT C
@@ -40,5 +47,5 @@ ADDER A B S C`;
 </script>
 
 <div class="mx-5 my-5">
-	<Visualizer width={500} height={500} shdl={text1} />
+	<Visualizer width={500} height={500} shdl={text2} />
 </div>
