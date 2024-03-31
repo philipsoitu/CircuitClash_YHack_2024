@@ -1,0 +1,14 @@
+{
+  "id": "mig_co4bvg9ue7a71jh4ep3g",
+  "parentID": "mig_co4bvdepe2mbada2u98g",
+  "checksum": "1:1bc47790dae9d49a55b90a88b42435a21a54bd8af1e608b1db922e49ef6ff2fe",
+  "operations": [
+    {
+      "renameColumn": {
+        "newName": "description",
+        "oldName": "Description",
+        "table": "questions"
+      }
+    }
+  ]
+}

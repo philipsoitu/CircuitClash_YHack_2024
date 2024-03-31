@@ -1,0 +1,16 @@
+{
+  "id": "mig_co4bvdepe2mbada2u98g",
+  "parentID": "mig_co4bflcfiil5rc1uaom0",
+  "checksum": "1:e99190291d413ff4c3df44d1bbaa0669cd5ce7729e9ef633afcc8da0c5e9d8a5",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "Description",
+          "type": "string"
+        },
+        "table": "questions"
+      }
+    }
+  ]
+}
