@@ -1,22 +1,17 @@
 <script lang="ts">
-	import { superForm } from 'sveltekit-superforms';
-	import { Field, Control } from 'formsnap';
-	import { Label } from 'formsnap';
-	import { zodClient } from 'sveltekit-superforms/adapters';
-	import type { PageData } from './$types.js';
 
 	import CodeMirror from 'svelte-codemirror-editor';
 	import { oneDark } from '@codemirror/theme-one-dark';
 
-	import SuperDebug from 'sveltekit-superforms';
-	import { onMount } from 'svelte';
+	export let data;
+	
 
 	let value = '';
 </script>
 
 <main class="container flex flex-1 flex-col overflow-hidden py-8">
 	<div class="mb-4 flex items-center justify-between">
-		<h1 class="h1">Multiplayer</h1>
+		<h1 class="h1">{data.messages[0].name}</h1>
 	</div>
 
 	<div class="grid flex-1 gap-8 overflow-hidden lg:grid-cols-3">

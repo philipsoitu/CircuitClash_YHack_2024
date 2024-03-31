@@ -17,14 +17,12 @@
     </a>
 
     <div class="flex items-center gap-4">
-        <a class="btn btn-sm" href="/commerce"> Commerce </a>
+        <a class="btn btn-sm" href="/circuit"> Levels </a>
 
-        <a class="btn btn-sm" href="/"> Chercher une maison </a>
-
-        <a class="btn btn-sm" href="/messages"> Messages citoyens </a>
+        <a class="btn btn-sm" href="/"> Docs </a>
 
         {#if !data.user}
-            <a class="btn btn-sm" href="/sign-in">Sign In</a>
+            <div class="btn btn-sm">Sign In</div>
         {:else}
             <button class="btn btn-flat h-10 w-10 p-0">
                 <img src={data.avatar} class="object-cover" alt="your user avatar" />
