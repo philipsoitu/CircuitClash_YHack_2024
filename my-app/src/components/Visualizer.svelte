@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { le } from '@xata.io/client';
 	import { onMount } from 'svelte';
 
 	export let width: number = 500;
@@ -29,18 +30,65 @@
 		wires = parseWire(trimmedString);
 		gates = parseGates(shdl);
 
-		gates.forEach((gate) => {
-			let gateOp = gate.split(' ');
-			if (gateOp[0]==="AND" || gateOp[0]==="OR" || gateOp[0]==="XOR"){
-
-				drawGate(gateOp[0], 200, 200, 60, 40, 12, gateOp.slice(1,3), [gateOp[3]]);
-			}
-		});
-
-		drawWire(10, 400, 100, 450, 'yo');
+		//positional
+		let x = 200;
+		let y = 200;
+		let gate_width = 60;
+		let gate_height = 40;
+		let fontSize = 12;
 
 		drawInputs(inputs);
 		drawOutputs(outputs);
+
+		let i = 1;
+		gates.forEach((gate) => {
+			let gateInfo = gate.split(' ');
+			let gateName = gateInfo[0];
+			let gateInputs;
+			let gateOutputs;
+
+			if (gateName === 'AND' || gateInfo[0] === 'OR' || gateInfo[0] === 'XOR') {
+				gateInputs = gateInfo.slice(1, 3);
+				gateOutputs = [gateInfo[3]];
+				drawGate(gateName, x, y, gate_width, gate_height, fontSize, gateInputs, gateOutputs);
+			} else if (gateName === 'NOT') {
+				gateInputs = [gateInfo[1]];
+				gateOutputs = [gateInfo[2]];
+				drawGate(gateName, x, y, gate_width, gate_height, fontSize, gateInputs, gateOutputs);
+			} else {
+				//custom gate fuck fuck fuck
+			}
+
+			//inputs
+			let length = inputs.length + 1;
+			gateInputs.forEach((input) => {
+				i = inputs.indexOf(input);
+				if (i !== -1) {
+					drawWire(x, y + (gate_height * (i + 1)) / length, 10, (height * (i + 1)) / length);
+				} else {
+					alert('FUUUUCCCCKCKKK');
+				}
+			});
+
+			//outputs
+			length = outputs.length + 1;
+			i = 1;
+			gateOutputs.forEach((output) => {
+				i = outputs.indexOf(output);
+				if (i !== -1) {
+					drawWire(
+						x + gate_width,
+						y + (gate_height * (i + 1)) / length,
+						width - 10,
+						(height * (i + 1)) / length
+					);
+				} else {
+					alert('FUUUUCCCCKCKKK');
+				}
+			});
+
+			y = y + 100;
+		});
 	}
 
 	//parser functions
