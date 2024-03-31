@@ -81,7 +81,7 @@
 	}
 </script>
 
-<main class="container flex flex-1 flex-col">
+<main class="flex justify-between rounded-2xl border-2 main px-4 py-2">
 	{#if data.messages[0].type == '1'}
 		<div class="grid flex-1 gap-2 lg:grid-cols-2">
 			{#if buttontextindex === 1}
@@ -114,14 +114,15 @@
 					theme={oneDark}
 					placeholder={'Start coding here..'}
 				/>
-				<div>
-					<button
-						class="btn"
-						on:click={() =>
-							sendCode(JSON.stringify({ code: value, number: parseInt(data.messages[0].id) }))}
-						>Submit</button
-					>
-					<button class="btn mt-4" on:click={changeText}>{buttontext[buttontextindex]}</button>
+				<div class="grid lg:grid-cols-2 flex-1 gap-2 mx-auto mt-2"> 
+					<button 
+						class="btn side-by-side-btn" 
+						on:click={() => sendCode(JSON.stringify({ code: value, number: parseInt(data.messages[0].id) }))}
+					>Submit</button>
+					<button 
+						class="btn side-by-side-btn" 
+						on:click={changeText}
+					>{buttontext[buttontextindex]}</button>
 				</div>
 			</div>
 		</div>
