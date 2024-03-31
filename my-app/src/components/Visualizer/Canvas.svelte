@@ -1,7 +1,5 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { LayoutBottombarCollapse } from 'tabler-icons-svelte';
-	import Layout from '../../routes/+layout.svelte';
 
 	export let width: number = 500;
 	export let height: number = 500;
@@ -74,16 +72,17 @@
 						}
 					}
 
-					let targetX: number = 10 + (480 * layer_index) / layerInputs[layer_index].length;
+					let targetX: number =
+						10 +
+						(480 * layer_index) / layerInputs[layer_index].length -
+						(layer_index * gate_width) / 2;
 					let targetY: number =
 						(height * (layerInputs[layer_index].indexOf(gateInputs[input]) + 1)) /
-						(layerInputs[layer_index].length + 1);
+						(layerInputs[layer_index].length + 1) + ((layer_index>=1) ? gate_height/2 : 0);
 					drawWire(x, y + (gate_height * (input + 1)) / (gateInputs.length + 1), targetX, targetY);
 				}
 			}
 		}
-
-		
 
 		drawInputs(inputs);
 		drawOutputs(outputs);
