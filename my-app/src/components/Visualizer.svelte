@@ -22,21 +22,25 @@
 	});
 
 	function render() {
-		const trimmedString = parseText(shdl);
+		//variables
+		let trimmedString = parseText(shdl);
 		inputs = parseInput(trimmedString);
 		outputs = parseOutput(trimmedString);
 		wires = parseWire(trimmedString);
 		gates = parseGates(shdl);
 
-		drawGate('nand', 100, 100);
-		// drawWire(10, 400, 100, 450, 'yo');
+		gates.forEach((gate) => {
+			let gateOp = gate.split(' ');
+			if (gateOp[0]==="AND" || gateOp[0]==="OR" || gateOp[0]==="XOR"){
 
-		// alert(parseText(shdl));
+				drawGate(gateOp[0], 200, 200, 60, 40, 12, gateOp.slice(1,3), [gateOp[3]]);
+			}
+		});
+
+		drawWire(10, 400, 100, 450, 'yo');
 
 		drawInputs(inputs);
 		drawOutputs(outputs);
-
-		alert(gates);
 	}
 
 	//parser functions
@@ -139,16 +143,42 @@
 		y: number,
 		width: number = 60,
 		height: number = 40,
+		fontSize: number = 12,
 		inputs: string[],
 		outputs: string[]
 	) {
 		if (ctx !== null) {
+			//body
 			ctx.beginPath();
 			ctx.rect(x, y, width, height);
 			ctx.stroke();
 
-			ctx.font = '12px Arial';
-			ctx.fillText(name, x + width / 2 - 13, y + height / 2 + 5);
+			//title
+			ctx.font = fontSize + 'px Arial';
+			const titleWidth = ctx.measureText(name).width;
+			const marginX = (width - titleWidth) / 2;
+			const marginY = (height + fontSize) / 2;
+			ctx.fillText(name, x + marginX, y + marginY);
+
+			//inputs
+			let length = inputs.length + 1;
+			let i = 1;
+			inputs.forEach((input) => {
+				ctx.beginPath();
+				ctx.arc(x, y + (height * i) / length, 3, 0, 2 * Math.PI);
+				ctx.stroke();
+				i++;
+			});
+
+			//outputs
+			length = outputs.length + 1;
+			i = 1;
+			outputs.forEach((output) => {
+				ctx.beginPath();
+				ctx.arc(x + width, y + (height * i) / length, 3, 0, 2 * Math.PI);
+				ctx.stroke();
+				i++;
+			});
 		}
 	}
 
@@ -202,7 +232,7 @@
 	}
 </script>
 
-<canvas {width} {height} bind:this={canvas}  />
+<canvas {width} {height} bind:this={canvas} />
 
 <style>
 	canvas {
